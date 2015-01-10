@@ -14,5 +14,12 @@
     <string name="password">Password</string>
     <string name="loginbt">LOGIN</string>
     <string name="signupbt">Sign up</string>
+    <string name="title_activity_activity_sign_up">ActivitySignUp</string>
+    <string name="nombreSU">Nombre</string>
+    <string name="etSUnombre">nombre/nick</string>
+    <string name="pssSU">Password</string>
+    <string name="etSUpss">Password</string>
+    <string name="tvSUmail">email</string>
+    <string name="correoSU">e-mail</string>
 
 </resources>

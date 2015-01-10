@@ -15,6 +15,11 @@
             android:name=".MainActivity2"
             android:label="@string/title_activity_main_activity2" >
             <intent-filter>
+                /*
+                Este intent-filter con action.MAIN y con category.LAUNCHER
+                indica que esta es la actividad que se lanza cuando ejecutas
+                la aplicación.
+                */
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -23,7 +28,11 @@
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".ActivitySignUp"
+            android:label="@string/title_activity_activity_sign_up" >
         </activity>
     </application>
 
