@@ -41,6 +41,7 @@
         android:layout_gravity="center_horizontal"
         android:hint="@string/signupbt"
         android:layout_marginTop="35dp"
-        android:clickable="true" />
+        android:clickable="true"
+        android:onClick="abrirSignUp" />
 
 </LinearLayout>
