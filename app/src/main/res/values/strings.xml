@@ -8,5 +8,11 @@
     <string name="title_section1">Section 1</string>
     <string name="title_section2">Section 2</string>
     <string name="title_section3">Section 3</string>
+    <string name="prueba">Prueba pruebecita</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="loginbt">LOGIN</string>
+    <string name="signupbt">Sign up</string>
 
 </resources>
