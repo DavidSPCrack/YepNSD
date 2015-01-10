@@ -38,6 +38,12 @@ public class MainActivity2 extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_activity2);
 
+        // Esta es la clase que se carga desde el AndroidManifest porque tiene definido
+        // el category.LAUNCHER
+        // cuando se carga esta clase, lee lo que haya en el onCreate
+        // A continuación lee el intent que almacena la clase LoginActivity
+        // el metodo startActivity ejecuta una actividad, esa actividad se la pasamos con
+        // el intent que se ejecuta y abre la clase LoginActivity
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
 

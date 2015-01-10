@@ -40,6 +40,7 @@
         android:id="@+id/signup_text"
         android:layout_gravity="center_horizontal"
         android:hint="@string/signupbt"
-        android:layout_marginTop="35dp" />
+        android:layout_marginTop="35dp"
+        android:clickable="true" />
 
 </LinearLayout>
