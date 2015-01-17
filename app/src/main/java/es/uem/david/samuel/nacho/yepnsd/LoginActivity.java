@@ -1,34 +1,25 @@
 package es.uem.david.samuel.nacho.yepnsd;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
+import android.widget.TextView;
 
 
 public class LoginActivity extends ActionBarActivity {
-
-    EditText et;
-    Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-        et = (EditText) this.findViewById(R.id.signup_text);
-
-
     }
 
-    public  void abrirSignUp(View v){
-
-        Intent intent = new Intent(this, ActivitySignUp.class);
+    public void openSignUp(View v) {
+        Intent intent = new Intent(this, SignUpActivity.class);
         startActivity(intent);
-
     }
 
 

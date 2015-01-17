@@ -10,16 +10,13 @@
     <string name="title_section3">Section 3</string>
     <string name="prueba">Prueba pruebecita</string>
     <string name="title_activity_login">LoginActivity</string>
-    <string name="username">Username</string>
-    <string name="password">Password</string>
+    <string name="username_hint">Username</string>
+    <string name="password_hint">Password</string>
+    <string name="email_hint">E-mail</string>
     <string name="loginbt">LOGIN</string>
-    <string name="signupbt">Sign up</string>
     <string name="title_activity_activity_sign_up">ActivitySignUp</string>
-    <string name="nombreSU">Nombre</string>
-    <string name="etSUnombre">nombre/nick</string>
-    <string name="pssSU">Password</string>
-    <string name="etSUpss">Password</string>
-    <string name="tvSUmail">email</string>
-    <string name="correoSU">e-mail</string>
+    <string name="title_activity_main_activity__tab">Yep!</string>
+    <string name="signup_button_label">Sign Up</string>
+    <string name="signup_label"><b>Don\'t have an account? Sign up</b></string>
 
 </resources>

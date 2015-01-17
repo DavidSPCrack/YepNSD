@@ -6,12 +6,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 
-public class ActivitySignUp extends ActionBarActivity {
+public class SignUpActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_activity_sign_up);
+        setContentView(R.layout.activity_signup);
     }
 
 
