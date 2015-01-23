@@ -1,17 +1,58 @@
 package es.uem.david.samuel.nacho.yepnsd;
 
-import android.support.v7.app.ActionBarActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
+
+import com.parse.ParseException;
+import com.parse.ParseUser;
+import com.parse.SignUpCallback;
 
 
-public class SignUpActivity extends ActionBarActivity {
+public class SignUpActivity extends AbstractActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
+    }
+
+    public void signUpClick(View v) {
+        String username = getEditTextValueAndValidate(R.id.usernameField);
+        if(!username.isEmpty()) {
+            String password = getEditTextValueAndValidate(R.id.passwordField);
+            if(!password.isEmpty()) {
+                String email = getEditTextValueAndValidate(R.id.emailField);
+                if(!email.isEmpty()) {
+
+                    boolean valid = !isAnyEmpty(username, password, email);
+
+                    if (valid) {
+                        ParseUser newUser = new ParseUser();
+                        newUser.setUsername(username);
+                        newUser.setPassword(password);
+                        newUser.setEmail(email);
+
+                        newUser.signUpInBackground(new SignUpCallback() {
+                            @Override
+                            public void done(ParseException e) {
+                                if(e == null) {
+                                    Intent intent = new Intent(SignUpActivity.this, MainActivityTabbed.class);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                    startActivity(intent);
+                                } else {
+                                    Toast.makeText(SignUpActivity.this, "Ups " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+                    }
+                }
+            }
+        }
     }
 
 

@@ -18,5 +18,8 @@
     <string name="title_activity_main_activity__tab">Yep!</string>
     <string name="signup_button_label">Sign Up</string>
     <string name="signup_label"><b>Don\'t have an account? Sign up</b></string>
+    <string name="alert">Alert</string>
+    <string name="field_missing">The field %1$s is required.</string>
+    <string name="alert_button">OK</string>
 
 </resources>
