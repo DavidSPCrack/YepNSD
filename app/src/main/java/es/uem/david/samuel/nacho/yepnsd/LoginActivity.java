@@ -5,6 +5,11 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
+
+import com.parse.LogInCallback;
+import com.parse.ParseException;
+import com.parse.ParseUser;
 
 
 public class LoginActivity extends AbstractActionBarActivity {
@@ -18,6 +23,33 @@ public class LoginActivity extends AbstractActionBarActivity {
     public void openSignUp(View v) {
         Intent intent = new Intent(this, SignUpActivity.class);
         startActivity(intent);
+    }
+
+    public void loginClick(View v) {
+        String username = getEditTextValueAndValidate(R.id.usernameField);
+        if (!username.isEmpty()) {
+            String password = getEditTextValueAndValidate(R.id.passwordField);
+            if (!password.isEmpty()) {
+
+                ParseUser.logInInBackground(username, password, new LogInCallback() {
+                    @Override
+                    public void done(ParseUser parseUser, ParseException e) {
+                        if (parseUser != null) {
+                            Intent intent = new Intent(LoginActivity.this, MainActivityTabbed.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(intent);
+                        } else {
+                            if (e == null) {
+                                Toast.makeText(LoginActivity.this, "Ups Login Invalid", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(LoginActivity.this, "Ups " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+                });
+            }
+        }
     }
 
 

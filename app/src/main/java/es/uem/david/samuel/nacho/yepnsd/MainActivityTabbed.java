@@ -14,6 +14,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.parse.ParseUser;
+
 import java.util.Locale;
 
 
@@ -39,16 +41,7 @@ public class MainActivityTabbed extends AbstractActionBarActivity implements Act
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_activity_tabbed);
 
-        // Esta es la clase que se carga desde el AndroidManifest porque tiene definido
-        // el category.LAUNCHER
-        // cuando se carga esta clase, lee lo que haya en el onCreate
-        // A continuación lee el intent que almacena la clase LoginActivity
-        // el metodo startActivity ejecuta una actividad, esa actividad se la pasamos con
-        // el intent que se ejecuta y abre la clase LoginActivity
-        Intent intent = new Intent(this, LoginActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
+        checkUserLogged();
 
         // Set up the action bar.
         final ActionBar actionBar = getSupportActionBar();
@@ -85,6 +78,25 @@ public class MainActivityTabbed extends AbstractActionBarActivity implements Act
         }
     }
 
+    private void checkUserLogged() {
+
+
+        ParseUser currentUser = ParseUser.getCurrentUser();
+
+        if (currentUser == null) {
+            // Esta es la clase que se carga desde el AndroidManifest porque tiene definido
+            // el category.LAUNCHER
+            // cuando se carga esta clase, lee lo que haya en el onCreate
+            // A continuación lee el intent que almacena la clase LoginActivity
+            // el metodo startActivity ejecuta una actividad, esa actividad se la pasamos con
+            // el intent que se ejecuta y abre la clase LoginActivity
+            Intent intent = new Intent(this, LoginActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+        }
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -102,6 +114,13 @@ public class MainActivityTabbed extends AbstractActionBarActivity implements Act
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            return true;
+        } else if (id == R.id.action_logout) {
+            ParseUser.logOut();
+            Intent intent = new Intent(MainActivityTabbed.this, LoginActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
             return true;
         }
 
