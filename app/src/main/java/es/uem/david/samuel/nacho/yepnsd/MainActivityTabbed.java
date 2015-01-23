@@ -1,6 +1,5 @@
 package es.uem.david.samuel.nacho.yepnsd;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -90,10 +89,7 @@ public class MainActivityTabbed extends AbstractActionBarActivity implements Act
             // A continuación lee el intent que almacena la clase LoginActivity
             // el metodo startActivity ejecuta una actividad, esa actividad se la pasamos con
             // el intent que se ejecuta y abre la clase LoginActivity
-            Intent intent = new Intent(this, LoginActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
+            openNewActivity(LoginActivity.class);
         }
     }
 
@@ -117,10 +113,7 @@ public class MainActivityTabbed extends AbstractActionBarActivity implements Act
             return true;
         } else if (id == R.id.action_logout) {
             ParseUser.logOut();
-            Intent intent = new Intent(MainActivityTabbed.this, LoginActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
+            openNewActivity(LoginActivity.class);
             return true;
         }
 

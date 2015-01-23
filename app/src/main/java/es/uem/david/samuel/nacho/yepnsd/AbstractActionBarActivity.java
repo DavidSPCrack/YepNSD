@@ -2,6 +2,7 @@ package es.uem.david.samuel.nacho.yepnsd;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
@@ -94,6 +95,19 @@ public abstract class AbstractActionBarActivity extends ActionBarActivity {
             }
         }
         return false;
+    }
+
+    protected void openNewActivity(Class<?> dstClass) {
+        openNewActivity(dstClass, true);
+    }
+
+    protected void openNewActivity(Class<?> dstClass, boolean swClearTask) {
+        Intent intent = new Intent(this, dstClass);
+        if(swClearTask) {
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        }
+        startActivity(intent);
     }
 
 }

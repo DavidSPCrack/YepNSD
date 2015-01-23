@@ -1,6 +1,5 @@
 package es.uem.david.samuel.nacho.yepnsd;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,8 +20,7 @@ public class LoginActivity extends AbstractActionBarActivity {
     }
 
     public void openSignUp(View v) {
-        Intent intent = new Intent(this, SignUpActivity.class);
-        startActivity(intent);
+        openNewActivity(SignUpActivity.class, false);
     }
 
     public void loginClick(View v) {
@@ -35,10 +33,7 @@ public class LoginActivity extends AbstractActionBarActivity {
                     @Override
                     public void done(ParseUser parseUser, ParseException e) {
                         if (parseUser != null) {
-                            Intent intent = new Intent(LoginActivity.this, MainActivityTabbed.class);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            startActivity(intent);
+                            openNewActivity(MainActivityTabbed.class);
                         } else {
                             if (e == null) {
                                 Toast.makeText(LoginActivity.this, "Ups Login Invalid", Toast.LENGTH_SHORT).show();

@@ -1,6 +1,5 @@
 package es.uem.david.samuel.nacho.yepnsd;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,11 +21,11 @@ public class SignUpActivity extends AbstractActionBarActivity {
 
     public void signUpClick(View v) {
         String username = getEditTextValueAndValidate(R.id.usernameField);
-        if(!username.isEmpty()) {
+        if (!username.isEmpty()) {
             String password = getEditTextValueAndValidate(R.id.passwordField);
-            if(!password.isEmpty()) {
+            if (!password.isEmpty()) {
                 String email = getEditTextValueAndValidate(R.id.emailField);
-                if(!email.isEmpty()) {
+                if (!email.isEmpty()) {
 
                     boolean valid = !isAnyEmpty(username, password, email);
 
@@ -39,11 +38,8 @@ public class SignUpActivity extends AbstractActionBarActivity {
                         newUser.signUpInBackground(new SignUpCallback() {
                             @Override
                             public void done(ParseException e) {
-                                if(e == null) {
-                                    Intent intent = new Intent(SignUpActivity.this, MainActivityTabbed.class);
-                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                    startActivity(intent);
+                                if (e == null) {
+                                    openNewActivity(MainActivityTabbed.class);
                                 } else {
                                     Toast.makeText(SignUpActivity.this, "Ups " + e.getMessage(), Toast.LENGTH_SHORT).show();
                                 }
