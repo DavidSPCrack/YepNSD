@@ -1,6 +1,7 @@
 package es.uem.david.samuel.nacho.yepnsd;
 
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,6 +18,9 @@ public class SignUpActivity extends AbstractActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
     }
 
     public void signUpClick(View v) {
