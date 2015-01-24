@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
 import android.view.View;
@@ -108,6 +109,11 @@ public abstract class AbstractActionBarActivity extends ActionBarActivity {
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         }
         startActivity(intent);
+    }
+
+    protected Drawable getDrawableRes(int id) {
+        Resources res = getResources();
+        return res.getDrawable(id);
     }
 
 }
