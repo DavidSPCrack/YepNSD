@@ -1,6 +1,8 @@
 package es.uem.david.samuel.nacho.yepnsd;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.v7.app.ActionBar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -33,17 +35,18 @@ public class LoginActivity extends AbstractActionBarActivity {
             String password = getEditTextValueAndValidate(R.id.passwordField);
             if (!password.isEmpty()) {
 
+                final ProgressDialog pd = getProgressDialog(R.string.login_in);
                 ParseUser.logInInBackground(username, password, new LogInCallback() {
                     @Override
                     public void done(ParseUser parseUser, ParseException e) {
+                        pd.dismiss();
                         if (parseUser != null) {
                             openNewActivity(MainActivityTabbed.class);
                         } else {
-                            if (e == null) {
-                                Toast.makeText(LoginActivity.this, "Ups Login Invalid", Toast.LENGTH_SHORT).show();
-                            } else {
-                                Toast.makeText(LoginActivity.this, "Ups " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                            }
+                            String title = getResourceString(R.string.alert);
+                            String msg =  e.getMessage();
+                            String button = getResourceString(R.string.alert_button);
+                            doDialog(title, msg, button);
                         }
                     }
                 });

@@ -23,5 +23,8 @@
     <string name="field_missing">The field %1$s is required.</string>
     <string name="alert_button">OK</string>
     <string name="background">Ribbit Frog Background Image</string>
+    <string name="login_in">Login In</string>
+    <string name="signing_up">Signing Up</string>
+    <string name="please_wait">Please wait&#8230;</string>
 
 </resources>

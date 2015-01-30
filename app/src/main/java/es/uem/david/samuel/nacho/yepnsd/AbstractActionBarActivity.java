@@ -1,6 +1,7 @@
 package es.uem.david.samuel.nacho.yepnsd;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -19,8 +20,8 @@ public abstract class AbstractActionBarActivity extends ActionBarActivity {
 
     protected String getEditTextValue(int id) {
         View v = findViewById(id);
-        if(v != null) {
-            if(v instanceof EditText) {
+        if (v != null) {
+            if (v instanceof EditText) {
                 EditText et = (EditText) v;
                 Editable editable = et.getText();
                 return editable.toString();
@@ -31,8 +32,8 @@ public abstract class AbstractActionBarActivity extends ActionBarActivity {
 
     protected String getEditTextHint(int id) {
         View v = findViewById(id);
-        if(v != null) {
-            if(v instanceof EditText) {
+        if (v != null) {
+            if (v instanceof EditText) {
                 EditText et = (EditText) v;
                 return et.getHint().toString();
             }
@@ -48,7 +49,7 @@ public abstract class AbstractActionBarActivity extends ActionBarActivity {
     }
 
     protected boolean validateNoEmpty(String text, String field) {
-        if(isTextEmpty(text)) {
+        if (isTextEmpty(text)) {
             doAlertDialog(field);
             return false;
         }
@@ -80,7 +81,7 @@ public abstract class AbstractActionBarActivity extends ActionBarActivity {
         AlertDialog alertDialog = new AlertDialog.Builder(this).create();
         alertDialog.setTitle(title);
         alertDialog.setMessage(msg);
-        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, button,
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, button,
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
@@ -89,9 +90,15 @@ public abstract class AbstractActionBarActivity extends ActionBarActivity {
         alertDialog.show();
     }
 
+    protected ProgressDialog getProgressDialog(int title) {
+        return  ProgressDialog.show(this,
+                getString(title),
+                getString(R.string.please_wait), true);
+    }
+
     protected boolean isAnyEmpty(String... s) {
-        for(int i=0;i<s.length;i++) {
-            if(isTextEmpty(s[i])) {
+        for (int i = 0; i < s.length; i++) {
+            if (isTextEmpty(s[i])) {
                 return true;
             }
         }
@@ -104,7 +111,7 @@ public abstract class AbstractActionBarActivity extends ActionBarActivity {
 
     protected void openNewActivity(Class<?> dstClass, boolean swClearTask) {
         Intent intent = new Intent(this, dstClass);
-        if(swClearTask) {
+        if (swClearTask) {
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         }
