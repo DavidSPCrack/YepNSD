@@ -27,11 +27,11 @@
             android:label="@string/title_activity_main_activity__tab"
             android:logo="@drawable/ic_launcher">
             <intent-filter>
-                /*
+                <!--
                 Este intent-filter con action.MAIN y con category.LAUNCHER
                 indica que esta es la actividad que se lanza cuando ejecutas
                 la aplicación.
-                */
+                -->
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
