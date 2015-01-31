@@ -1,5 +1,6 @@
 package es.uem.david.samuel.nacho.yepnsd;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.view.Menu;
@@ -39,13 +40,18 @@ public class SignUpActivity extends AbstractActionBarActivity {
                         newUser.setPassword(password);
                         newUser.setEmail(email);
 
+                        final ProgressDialog pd = getProgressDialog(R.string.signing_up);
                         newUser.signUpInBackground(new SignUpCallback() {
                             @Override
                             public void done(ParseException e) {
+                                pd.dismiss();
                                 if (e == null) {
                                     openNewActivity(MainActivityTabbed.class);
                                 } else {
-                                    Toast.makeText(SignUpActivity.this, "Ups " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                    String title = getResourceString(R.string.alert);
+                                    String msg =  e.getMessage();
+                                    String button = getResourceString(R.string.alert_button);
+                                    doDialog(title, msg, button);
                                 }
                             }
                         });

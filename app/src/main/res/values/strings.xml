@@ -2,6 +2,7 @@
 <resources>
 
     <string name="app_name">Yep!</string>
+    <string name="subtitle">A Targaryen Project</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="action_logout">Sign Out</string>
@@ -14,14 +15,18 @@
     <string name="username_hint">Username</string>
     <string name="password_hint">Password</string>
     <string name="email_hint">E-mail</string>
-    <string name="loginbt">LOGIN</string>
+    <string name="loginbt">SIGN IN</string>
     <string name="title_activity_activity_sign_up">ActivitySignUp</string>
     <string name="title_activity_main_activity__tab">Yep!</string>
     <string name="signup_button_label">Sign Up</string>
-    <string name="signup_label"><b>Don\'t have an account? Sign up</b></string>
+    <string name="signup_label"><b>Don\'t have an account? Sign up!</b></string>
     <string name="alert">Alert</string>
     <string name="field_missing">The field %1$s is required.</string>
     <string name="alert_button">OK</string>
     <string name="background">Ribbit Frog Background Image</string>
+    <string name="login_in">Login In</string>
+    <string name="signing_up">Signing Up</string>
+    <string name="please_wait">Please wait&#8230;</string>
+    <string name="signup_title">Sign Up!</string>
 
 </resources>
