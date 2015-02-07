@@ -2,7 +2,6 @@ package es.uem.david.samuel.nacho.yepnsd;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
@@ -15,10 +14,10 @@ import android.view.ViewGroup;
 
 import com.parse.ParseUser;
 
-import java.util.Locale;
-
 
 public class MainActivityTabbed extends AbstractActionBarActivity implements ActionBar.TabListener {
+
+    public static final String TAG = MainActivityTabbed.class.getSimpleName();
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -44,11 +43,13 @@ public class MainActivityTabbed extends AbstractActionBarActivity implements Act
 
         // Set up the action bar.
         final ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayShowHomeEnabled(true);
+        actionBar.setIcon(R.drawable.ic_launcher);
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(), this);
 
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.pager);
@@ -97,7 +98,7 @@ public class MainActivityTabbed extends AbstractActionBarActivity implements Act
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main_activity__tab, menu);
+        getMenuInflater().inflate(R.menu.menu_main_activity_tab, menu);
         return true;
     }
 
@@ -115,6 +116,8 @@ public class MainActivityTabbed extends AbstractActionBarActivity implements Act
             ParseUser.logOut();
             openNewActivity(LoginActivity.class);
             return true;
+        } else if(id == R.id.action_edit_friends) {
+            openNewActivity(EditFriendsActivity.class, false);
         }
 
         return super.onOptionsItemSelected(item);
@@ -168,42 +171,5 @@ public class MainActivityTabbed extends AbstractActionBarActivity implements Act
         }
     }
 
-    /**
-     * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
-     * one of the sections/tabs/pages.
-     */
-    public class SectionsPagerAdapter extends FragmentPagerAdapter {
-
-        public SectionsPagerAdapter(FragmentManager fm) {
-            super(fm);
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            // getItem is called to instantiate the fragment for the given page.
-            // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(position + 1);
-        }
-
-        @Override
-        public int getCount() {
-            // Show 3 total pages.
-            return 3;
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            Locale l = Locale.getDefault();
-            switch (position) {
-                case 0:
-                    return getString(R.string.title_section1).toUpperCase(l);
-                case 1:
-                    return getString(R.string.title_section2).toUpperCase(l);
-                case 2:
-                    return getString(R.string.title_section3).toUpperCase(l);
-            }
-            return null;
-        }
-    }
 
 }

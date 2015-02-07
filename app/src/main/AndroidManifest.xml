@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="es.uem.david.samuel.nacho.yepnsd">
+    package="es.uem.david.samuel.nacho.yepnsd" >
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -10,7 +10,7 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme" >
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login"
@@ -19,14 +19,15 @@
         <activity
             android:name=".SignUpActivity"
             android:label="@string/title_activity_activity_sign_up"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".LoginActivity">
+            android:parentActivityName=".LoginActivity"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".MainActivityTabbed"
             android:label="@string/title_activity_main_activity__tab"
-            android:logo="@drawable/ic_launcher">
+            android:logo="@drawable/ic_launcher" >
             <intent-filter>
+
                 <!--
                 Este intent-filter con action.MAIN y con category.LAUNCHER
                 indica que esta es la actividad que se lanza cuando ejecutas
@@ -36,6 +37,12 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".EditFriendsActivity"
+            android:label="@string/title_activity_edit_friends"
+            android:parentActivityName=".MainActivityTabbed"
+            android:screenOrientation="portrait">
         </activity>
     </application>
 
