@@ -6,10 +6,10 @@ import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
 
 /**
  * Created by usuario.apellido on 06/02/2015.
+ *
  * @author david.sancho
  */
 public class InboxFragment extends ListFragment {
@@ -32,7 +32,7 @@ public class InboxFragment extends ListFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_inbox, container, false);
 
-        Util.hideView(rootView, R.id.progressBarInbox);
+        Util.hideView(rootView, R.id.progressBar);
 
         return rootView;
     }

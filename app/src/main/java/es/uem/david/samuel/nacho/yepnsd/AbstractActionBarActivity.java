@@ -91,7 +91,7 @@ public abstract class AbstractActionBarActivity extends ActionBarActivity {
     }
 
     protected ProgressDialog getProgressDialog(int title) {
-        return  ProgressDialog.show(this,
+        return ProgressDialog.show(this,
                 getString(title),
                 getString(R.string.please_wait), true);
     }

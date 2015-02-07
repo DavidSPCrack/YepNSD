@@ -18,7 +18,8 @@
     <string name="loginbt">SIGN IN</string>
     <string name="title_activity_activity_sign_up">ActivitySignUp</string>
     <string name="title_activity_main_activity__tab">Yep!</string>
-    <string name="signup_button_label">Sign Up</string>
+    <string name="signup_button_label">SIGN UP</string>
+    <string name="cancel_button_label">CANCEL</string>
     <string name="signup_label"><b>Don\'t have an account? Sign up!</b></string>
     <string name="alert">Alert</string>
     <string name="field_missing">The field %1$s is required.</string>
@@ -33,5 +34,6 @@
     <string name="action_edit_friends">Edit Friends</string>
     <string name="title_activity_edit_friends">EditFriendsActivity</string>
     <string name="no_friends">There\'s no users to add</string>
-
+    <string name="background_content_description">Background Image</string>
+    <string name="content_desc_button_divider">Button divider</string>
 </resources>

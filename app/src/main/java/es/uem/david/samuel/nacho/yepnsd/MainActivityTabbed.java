@@ -116,7 +116,7 @@ public class MainActivityTabbed extends AbstractActionBarActivity implements Act
             ParseUser.logOut();
             openNewActivity(LoginActivity.class);
             return true;
-        } else if(id == R.id.action_edit_friends) {
+        } else if (id == R.id.action_edit_friends) {
             openNewActivity(EditFriendsActivity.class, false);
         }
 

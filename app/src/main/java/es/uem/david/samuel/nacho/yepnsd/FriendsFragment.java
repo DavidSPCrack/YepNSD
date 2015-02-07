@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ListView;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -59,7 +58,7 @@ public class FriendsFragment extends ListFragment {
         super.onResume();
 
         final FragmentActivity fAct = getActivity();
-        final View progressBar = fAct.findViewById(R.id.progressBarFriends);
+        final View progressBar = fAct.findViewById(R.id.progressBar);
 
         mCurrentUser = ParseUser.getCurrentUser();
         mFriendsRelation = mCurrentUser.getRelation(Constantes.Users.FRIENDS_RELATION);
