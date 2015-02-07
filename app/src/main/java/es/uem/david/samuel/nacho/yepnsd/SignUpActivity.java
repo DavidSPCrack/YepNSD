@@ -83,4 +83,6 @@ public class SignUpActivity extends AbstractActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
 }
