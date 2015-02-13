@@ -17,4 +17,10 @@
         android:orderInCategory="300"
         android:title="@string/action_logout"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/action_camera"
+        android:orderInCategory="400"
+        android:title="@string/camera_action_label"
+        android:icon="@drawable/ic_action_camera"
+        app:showAsAction="ifRoom" />
 </menu>

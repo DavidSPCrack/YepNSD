@@ -7,6 +7,13 @@ package es.uem.david.samuel.nacho.yepnsd;
  */
 public class Constantes {
 
+    public static final class CameraActions {
+        public static final int TAKE_PHOTO = 0;
+        public static final int MAKE_VIDEO = 1;
+        public static final int CHOOSE_PHOTO = 2;
+        public static final int CHOOSE_VIDEO = 3;
+    }
+
     public static final class Users {
         public static final String FIELD_USERNAME = "username";
         public static final String FIELD_PASSWORD = "password";

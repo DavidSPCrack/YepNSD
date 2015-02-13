@@ -58,7 +58,7 @@ public class FriendsFragment extends ListFragment {
         super.onResume();
 
         final FragmentActivity fAct = getActivity();
-        final View progressBar = fAct.findViewById(R.id.progressBar);
+        final View progressBar = fAct.findViewById(R.id.progressBarFriends);
 
         mCurrentUser = ParseUser.getCurrentUser();
         mFriendsRelation = mCurrentUser.getRelation(Constantes.Users.FRIENDS_RELATION);

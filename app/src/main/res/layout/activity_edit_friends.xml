@@ -25,7 +25,7 @@
         android:text="@string/no_friends" />
 
     <ProgressBar
-        android:id="@+id/progressBar"
+        android:id="@+id/progressBarFriends"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"

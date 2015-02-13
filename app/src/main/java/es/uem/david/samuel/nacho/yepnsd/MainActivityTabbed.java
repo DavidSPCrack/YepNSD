@@ -118,6 +118,8 @@ public class MainActivityTabbed extends AbstractActionBarActivity implements Act
             return true;
         } else if (id == R.id.action_edit_friends) {
             openNewActivity(EditFriendsActivity.class, false);
+        } else if (id == R.id.action_camera) {
+            doCameraDialog();
         }
 
         return super.onOptionsItemSelected(item);

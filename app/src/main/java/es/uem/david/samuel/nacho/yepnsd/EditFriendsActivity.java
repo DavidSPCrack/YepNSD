@@ -110,7 +110,7 @@ public class EditFriendsActivity extends AbstractListActivity {
     }
 
     private void addFriendCheckmarks() {
-        final View progressBar = findViewById(R.id.progressBar);
+        final View progressBar = findViewById(R.id.progressBarFriends);
         final ListView listView = getListView();
 
         ParseQuery<ParseUser> qFriends = mFriendsRelation.getQuery();
