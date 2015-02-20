@@ -51,4 +51,9 @@
         <item>@string/choose_picture</item>
         <item>@string/choose_video</item>
     </string-array>
+    <string name="title_activity_recipients">Choose recipients</string>
+    <string name="no_recipents">Friend\'s list empty</string>
+    <string name="send">Send</string>
+    <string name="title_activity_image_view">ImageViewActivity</string>
+    <string name="message_image">Message Image</string>
 </resources>

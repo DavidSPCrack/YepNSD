@@ -25,6 +25,7 @@ import java.io.InputStream;
  */
 public abstract class AbstractActionBarActivity extends ActionBarActivity {
 
+
     public final static int TAKE_PHOTO_REQUEST = 0;
     public final static int MAKE_VIDEO_REQUEST = 1;
     public final static int CHOOSE_PHOTO_REQUEST = 2;
@@ -218,15 +219,18 @@ public abstract class AbstractActionBarActivity extends ActionBarActivity {
                     Intent mediaScantIntentPhoto = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
                     mediaScantIntentPhoto.setData(mMediaUri);
                     sendBroadcast(mediaScantIntentPhoto);
+                    startRecipentsList(Constantes.FileTypes.IMAGE);
                     break;
                 case MAKE_VIDEO_REQUEST:
                     Intent mediaScantIntentVideo = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
                     mediaScantIntentVideo.setData(mMediaUri);
                     sendBroadcast(mediaScantIntentVideo);
+                    startRecipentsList(Constantes.FileTypes.VIDEO);
                     break;
                 case CHOOSE_PHOTO_REQUEST:
                     if (data != null) {
                         mMediaUri = data.getData();
+                        startRecipentsList(Constantes.FileTypes.IMAGE);
                     } else {
                         // TODO Mensaje de error
                     }
@@ -243,6 +247,8 @@ public abstract class AbstractActionBarActivity extends ActionBarActivity {
                                 String msg = getString(R.string.video_size_limit);
                                 String button = getResourceString(R.string.alert_button);
                                 doDialog(title, msg, button);
+                            } else {
+                                startRecipentsList(Constantes.FileTypes.VIDEO);
                             }
                         } catch (FileNotFoundException e) {
                             // TODO Mensaje de error
@@ -264,5 +270,12 @@ public abstract class AbstractActionBarActivity extends ActionBarActivity {
         } else if (resultCode != RESULT_CANCELED) {
             //TODO Mensaje de error
         }
+    }
+
+    private void startRecipentsList(String fileType) {
+        Intent intent = new Intent(this, RecipientsActivity.class);
+        intent.setData(mMediaUri);
+        intent.putExtra(Constantes.ParseClasses.Messages.KEY_FILE_TYPE, fileType);
+        startActivity(intent);
     }
 }
