@@ -2,21 +2,20 @@ package es.uem.david.samuel.nacho.yepnsd;
 
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.TouchUtils;
-import android.text.Editable;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.parse.ParseUser;
 
 /**
- * Created by david.sancho on 21/02/2015.
+ * Created by samuel.garcia on 21/02/2015.
  *
- * @author david.sancho
+ * @author samuel.garcia
  */
 public class LoginTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 
-    private static final String USERNAME = "D A V I D";
-    private static final String PASSWORD = "D A V I D";
+    private static final String USERNAME = "S A M";
+    private static final String PASSWORD = "S A M";
 
     private LoginActivity actividad;
     private EditText username;
