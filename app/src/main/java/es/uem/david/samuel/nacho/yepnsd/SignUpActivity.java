@@ -6,7 +6,6 @@ import android.support.v7.app.ActionBar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.parse.ParseException;
 import com.parse.ParseUser;
@@ -22,6 +21,10 @@ public class SignUpActivity extends AbstractActionBarActivity {
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
+    }
+
+    public void cancelClick(View v) {
+        openNewActivity(LoginActivity.class);
     }
 
     public void signUpClick(View v) {
@@ -49,7 +52,7 @@ public class SignUpActivity extends AbstractActionBarActivity {
                                     openNewActivity(MainActivityTabbed.class);
                                 } else {
                                     String title = getResourceString(R.string.alert);
-                                    String msg =  e.getMessage();
+                                    String msg = e.getMessage();
                                     String button = getResourceString(R.string.alert_button);
                                     doDialog(title, msg, button);
                                 }

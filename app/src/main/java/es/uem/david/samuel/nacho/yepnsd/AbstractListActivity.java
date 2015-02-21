@@ -7,7 +7,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
-import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
 import android.view.View;
 import android.widget.EditText;
@@ -92,7 +91,7 @@ public abstract class AbstractListActivity extends ListActivity {
     }
 
     protected ProgressDialog getProgressDialog(int title) {
-        return  ProgressDialog.show(this,
+        return ProgressDialog.show(this,
                 getString(title),
                 getString(R.string.please_wait), true);
     }

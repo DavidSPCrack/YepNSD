@@ -28,9 +28,9 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         // getItem is called to instantiate the fragment for the given page.
         // Return a PlaceholderFragment (defined as a static inner class below).
-        if(position == 0) {
+        if (position == 0) {
             return InboxFragment.newInstance(position + 1);
-        } else if(position == 1) {
+        } else if (position == 1) {
             return FriendsFragment.newInstance(position + 1);
         }
         return MainActivityTabbed.PlaceholderFragment.newInstance(position + 1);

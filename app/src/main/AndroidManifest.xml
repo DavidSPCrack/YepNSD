@@ -4,6 +4,10 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <uses-feature android:name="android.hardware.camera2" />
 
     <application
         android:name=".YepApplication"
@@ -14,14 +18,12 @@
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".SignUpActivity"
             android:label="@string/title_activity_activity_sign_up"
             android:parentActivityName=".LoginActivity"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".MainActivityTabbed"
             android:label="@string/title_activity_main_activity__tab"
@@ -42,7 +44,19 @@
             android:name=".EditFriendsActivity"
             android:label="@string/title_activity_edit_friends"
             android:parentActivityName=".MainActivityTabbed"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.Light.DarkActionBar" />
+        <activity
+            android:name=".RecipientsActivity"
+            android:label="@string/title_activity_recipients"
+            android:parentActivityName=".MainActivityTabbed"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.Light.DarkActionBar" />
+        <activity
+            android:name=".ViewImageActivity"
+            android:parentActivityName=".MainActivityTabbed"
+            android:screenOrientation="portrait"
+            android:label="@string/title_activity_image_view" >
         </activity>
     </application>
 

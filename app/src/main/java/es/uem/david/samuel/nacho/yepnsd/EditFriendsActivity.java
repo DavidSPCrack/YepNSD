@@ -41,13 +41,13 @@ public class EditFriendsActivity extends AbstractListActivity {
         String username = usernames.get(position);
 
         ParseUser user = null;
-        if(username != null)
-        for(ParseUser mUser : mUsers) {
-            if(username.equals(mUser.getUsername())) {
-                user = mUser;
-                break;
+        if (username != null)
+            for (ParseUser mUser : mUsers) {
+                if (username.equals(mUser.getUsername())) {
+                    user = mUser;
+                    break;
+                }
             }
-        }
         if (selected) {
             mFriendsRelation.add(user);
         } else {
@@ -110,7 +110,7 @@ public class EditFriendsActivity extends AbstractListActivity {
     }
 
     private void addFriendCheckmarks() {
-        final View progressBar = findViewById(R.id.progressBar);
+        final View progressBar = findViewById(R.id.progressBarFriends);
         final ListView listView = getListView();
 
         ParseQuery<ParseUser> qFriends = mFriendsRelation.getQuery();
@@ -121,13 +121,13 @@ public class EditFriendsActivity extends AbstractListActivity {
                     for (ParseUser user : mUsers) {
                         boolean exist = existRelation(users, user);
                         int pos = -1;
-                        for(int i =0; i<usernames.size();i++) {
-                            if(usernames.get(i).equals(user.getUsername())) {
+                        for (int i = 0; i < usernames.size(); i++) {
+                            if (usernames.get(i).equals(user.getUsername())) {
                                 pos = i;
                                 break;
                             }
                         }
-                        if(pos != -1)
+                        if (pos != -1)
                             listView.setItemChecked(pos, exist);
                     }
                     progressBar.setVisibility(View.INVISIBLE);
