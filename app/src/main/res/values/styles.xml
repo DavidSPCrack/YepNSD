@@ -5,6 +5,11 @@
         <item name="colorControlActivated">@color/contrastColor</item>
         <item name="android:listViewStyle">@style/LightPurpleBackground</item>
         <item name="android:gridViewStyle">@style/LightPurpleBackground</item>
+        <item name="actionOverflowButtonStyle">@style/AppTheme.OverFlow</item>
+    </style>
+
+    <style name="AppTheme.OverFlow" parent="android:Widget.ActionButton.Overflow">
+        <item name="android:src">@drawable/ic_menu_overflow</item>
     </style>
 
     <style name="LightPurpleBackground">

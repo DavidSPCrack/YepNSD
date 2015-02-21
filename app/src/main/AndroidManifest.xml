@@ -47,16 +47,21 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Holo.Light.DarkActionBar" />
         <activity
-            android:name=".RecipientsActivity"
+            android:name=".RecipientsFragment"
             android:label="@string/title_activity_recipients"
             android:parentActivityName=".MainActivityTabbed"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Holo.Light.DarkActionBar" />
         <activity
             android:name=".ViewImageActivity"
+            android:label="@string/title_activity_image_view"
             android:parentActivityName=".MainActivityTabbed"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_image_view" >
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".RecipientsActivity"
+            android:parentActivityName=".MainActivityTabbed"
+            android:label="@string/title_activity_recipients" >
         </activity>
     </application>
 
