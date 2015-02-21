@@ -1,5 +1,7 @@
 package es.uem.david.samuel.nacho.yepnsd;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -45,6 +47,8 @@ public class MainActivityTabbed extends AbstractActionBarActivity implements Act
         final ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setIcon(R.drawable.ic_launcher);
+        actionBar.setBackgroundDrawable(new ColorDrawable(Color.rgb(130, 130, 130)));
+        actionBar.setStackedBackgroundDrawable(new ColorDrawable(Color.rgb(85, 55, 124)));
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
         // Create the adapter that will return a fragment for each of the three
@@ -73,7 +77,7 @@ public class MainActivityTabbed extends AbstractActionBarActivity implements Act
             // this tab is selected.
             actionBar.addTab(
                     actionBar.newTab()
-                            .setText(mSectionsPagerAdapter.getPageTitle(i))
+                            .setIcon(mSectionsPagerAdapter.getIcon(i))
                             .setTabListener(this));
         }
     }

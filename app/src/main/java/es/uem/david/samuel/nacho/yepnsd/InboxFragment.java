@@ -72,7 +72,7 @@ public class InboxFragment extends ListFragment {
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> parseObjects, ParseException e) {
-                mMessages.clear();
+                adapter.clear();
                 if (parseObjects != null) {
                     mMessages = parseObjects;
                     for (ParseObject message : mMessages) {
