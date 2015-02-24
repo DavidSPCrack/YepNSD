@@ -15,8 +15,8 @@ import com.parse.ParseUser;
  */
 public class LoginTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 
-    private static final String USERNAME = "D A V I D";
-    private static final String PASSWORD = "D A V I D";
+    private static final String USERNAME = "N A C H O";
+    private static final String PASSWORD = "N A C H O";
 
     private LoginActivity actividad;
     private EditText username;

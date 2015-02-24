@@ -41,6 +41,16 @@ public class MainActivityTabbed extends AbstractActionBarActivity implements Act
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_activity_tabbed);
 
+
+
+        //mostrar iconos en el ActionBar
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setIcon(R.drawable.ic_launcher);
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.rgb(130,130,130)));
+        getSupportActionBar().setStackedBackgroundDrawable(new ColorDrawable(Color.rgb(85,55,124)));
+
+
+
         checkUserLogged();
 
         // Set up the action bar.
