@@ -9,9 +9,9 @@ import android.widget.EditText;
 import com.parse.ParseUser;
 
 /**
- * Created by david.sancho on 21/02/2015.
+ * Created by nacho on 21/02/2015.
  *
- * @author david.sancho
+ * @author nacho
  */
 public class LoginTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 
