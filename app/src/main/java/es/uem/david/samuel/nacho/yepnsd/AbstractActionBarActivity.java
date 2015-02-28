@@ -35,112 +35,6 @@ public abstract class AbstractActionBarActivity extends ActionBarActivity {
 
     private Uri mMediaUri;
 
-    protected String getEditTextValue(int id) {
-        View v = findViewById(id);
-        if (v != null) {
-            if (v instanceof EditText) {
-                EditText et = (EditText) v;
-                Editable editable = et.getText();
-                return editable.toString();
-            }
-        }
-        return "";
-    }
-
-    protected String getEditTextHint(int id) {
-        View v = findViewById(id);
-        if (v != null) {
-            if (v instanceof EditText) {
-                EditText et = (EditText) v;
-                return et.getHint().toString();
-            }
-        }
-        return "";
-    }
-
-    protected String getEditTextValueAndValidate(int id) {
-        String text = getEditTextValue(id);
-        String field = getEditTextHint(id);
-        validateNoEmpty(text, field);
-        return text;
-    }
-
-    protected boolean validateNoEmpty(String text, String field) {
-        if (isTextEmpty(text)) {
-            doAlertDialog(field);
-            return false;
-        }
-        return true;
-    }
-
-    protected String getResourceString(int id) {
-        Resources res = getResources();
-        return res.getString(id);
-    }
-
-    protected String getResourceString(int id, String var1) {
-        String s = getResourceString(id);
-        return String.format(s, var1);
-    }
-
-    protected boolean isTextEmpty(String s) {
-        return s == null || s.isEmpty();
-    }
-
-    protected void doAlertDialog(String field) {
-        String title = getResourceString(R.string.alert);
-        String msg = getResourceString(R.string.field_missing, field);
-        String button = getResourceString(R.string.alert_button);
-        doDialog(title, msg, button);
-    }
-
-    protected void doDialog(String title, String msg, String button) {
-        AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-        alertDialog.setTitle(title);
-        alertDialog.setMessage(msg);
-        alertDialog.setIcon(android.R.drawable.ic_dialog_alert);
-        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, button,
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-        alertDialog.show();
-    }
-
-    protected ProgressDialog getProgressDialog(int title) {
-        return ProgressDialog.show(this,
-                getString(title),
-                getString(R.string.please_wait), true);
-    }
-
-    protected boolean isAnyEmpty(String... s) {
-        for (int i = 0; i < s.length; i++) {
-            if (isTextEmpty(s[i])) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    protected void openNewActivity(Class<?> dstClass) {
-        openNewActivity(dstClass, true);
-    }
-
-    protected void openNewActivity(Class<?> dstClass, boolean swClearTask) {
-        Intent intent = new Intent(this, dstClass);
-        if (swClearTask) {
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        }
-        startActivity(intent);
-    }
-
-    protected Drawable getDrawableRes(int id) {
-        Resources res = getResources();
-        return res.getDrawable(id);
-    }
-
     protected void doCameraDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setItems(R.array.camera_choices, mDialogListener());
@@ -243,10 +137,8 @@ public abstract class AbstractActionBarActivity extends ActionBarActivity {
                             is = getContentResolver().openInputStream(mMediaUri);
                             int fileSize = is.available();
                             if (fileSize > FILE_SIZE_LIMIT) {
-                                String title = getResourceString(R.string.alert);
-                                String msg = getString(R.string.video_size_limit);
-                                String button = getResourceString(R.string.alert_button);
-                                doDialog(title, msg, button);
+                                UtilActivity util = getUtil();
+                                util.doAlertDialog(R.string.video_size_limit);
                             } else {
                                 startRecipentsList(Constantes.FileTypes.VIDEO);
                             }
@@ -277,5 +169,9 @@ public abstract class AbstractActionBarActivity extends ActionBarActivity {
         intent.setData(mMediaUri);
         intent.putExtra(Constantes.ParseClasses.Messages.KEY_FILE_TYPE, fileType);
         startActivity(intent);
+    }
+
+    protected UtilActivity getUtil() {
+        return new UtilActivity(this);
     }
 }

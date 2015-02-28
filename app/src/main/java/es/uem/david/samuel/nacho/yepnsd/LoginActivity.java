@@ -24,27 +24,29 @@ public class LoginActivity extends AbstractActionBarActivity {
     }
 
     public void openSignUp(View v) {
-        openNewActivity(SignUpActivity.class, false);
+        UtilActivity util = getUtil();
+        util.openNewActivity(SignUpActivity.class, false);
     }
 
     public void loginClick(View v) {
-        String username = getEditTextValueAndValidate(R.id.usernameField);
+        final UtilActivity util = getUtil();
+        String username = util.getEditTextValueAndValidate(R.id.usernameField);
         if (!username.isEmpty()) {
-            String password = getEditTextValueAndValidate(R.id.passwordField);
+            String password = util.getEditTextValueAndValidate(R.id.passwordField);
             if (!password.isEmpty()) {
 
-                final ProgressDialog pd = getProgressDialog(R.string.login_in);
+                final ProgressDialog pd = util.getProgressDialog(R.string.login_in);
                 ParseUser.logInInBackground(username, password, new LogInCallback() {
                     @Override
                     public void done(ParseUser parseUser, ParseException e) {
                         pd.dismiss();
                         if (parseUser != null) {
-                            openNewActivity(MainActivityTabbed.class);
+                            util.openNewActivity(MainActivityTabbed.class);
                         } else {
-                            String title = getResourceString(R.string.alert);
+                            String title = util.getResourceString(R.string.alert);
                             String msg = e.getMessage();
-                            String button = getResourceString(R.string.alert_button);
-                            doDialog(title, msg, button);
+                            String button = util.getResourceString(R.string.alert_button);
+                            util.doDialog(title, msg, button);
                         }
                     }
                 });

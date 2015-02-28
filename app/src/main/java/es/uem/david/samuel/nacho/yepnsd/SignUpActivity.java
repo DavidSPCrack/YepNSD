@@ -24,18 +24,20 @@ public class SignUpActivity extends AbstractActionBarActivity {
     }
 
     public void cancelClick(View v) {
-        openNewActivity(LoginActivity.class);
+        UtilActivity util = getUtil();
+        util.openNewActivity(LoginActivity.class);
     }
 
     public void signUpClick(View v) {
-        String username = getEditTextValueAndValidate(R.id.usernameField);
+        final UtilActivity util = getUtil();
+        String username = util.getEditTextValueAndValidate(R.id.usernameField);
         if (!username.isEmpty()) {
-            String password = getEditTextValueAndValidate(R.id.passwordField);
+            String password = util.getEditTextValueAndValidate(R.id.passwordField);
             if (!password.isEmpty()) {
-                String email = getEditTextValueAndValidate(R.id.emailField);
+                String email = util.getEditTextValueAndValidate(R.id.emailField);
                 if (!email.isEmpty()) {
 
-                    boolean valid = !isAnyEmpty(username, password, email);
+                    boolean valid = !util.isAnyEmpty(username, password, email);
 
                     if (valid) {
                         ParseUser newUser = new ParseUser();
@@ -43,19 +45,16 @@ public class SignUpActivity extends AbstractActionBarActivity {
                         newUser.setPassword(password);
                         newUser.setEmail(email);
 
-                        final ProgressDialog pd = getProgressDialog(R.string.signing_up);
+                        final ProgressDialog pd = util.getProgressDialog(R.string.signing_up);
                         newUser.signUpInBackground(new SignUpCallback() {
                             @Override
                             public void done(ParseException e) {
-                                pd.dismiss();
-                                if (e == null) {
-                                    openNewActivity(MainActivityTabbed.class);
-                                } else {
-                                    String title = getResourceString(R.string.alert);
-                                    String msg = e.getMessage();
-                                    String button = getResourceString(R.string.alert_button);
-                                    doDialog(title, msg, button);
-                                }
+                            pd.dismiss();
+                            if (e == null) {
+                                util.openNewActivity(MainActivityTabbed.class);
+                            } else {
+                                util.doAlertDialog(e.getMessage());
+                            }
                             }
                         });
                     }

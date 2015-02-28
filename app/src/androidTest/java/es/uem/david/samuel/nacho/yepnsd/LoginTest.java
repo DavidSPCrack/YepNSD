@@ -18,7 +18,6 @@ public class LoginTest extends ActivityInstrumentationTestCase2<LoginActivity> {
     private static final String USERNAME = "D A V I D";
     private static final String PASSWORD = "D A V I D";
 
-    private LoginActivity actividad;
     private EditText username;
     private EditText password;
     private Button login;
@@ -31,7 +30,7 @@ public class LoginTest extends ActivityInstrumentationTestCase2<LoginActivity> {
     protected void setUp() throws Exception {
         super.setUp();
 
-        actividad = getActivity();
+        LoginActivity actividad = getActivity();
         username = (EditText) actividad.findViewById(R.id.usernameField);
         password = (EditText) actividad.findViewById(R.id.passwordField);
         login = (Button) actividad.findViewById(R.id.loginbutton);

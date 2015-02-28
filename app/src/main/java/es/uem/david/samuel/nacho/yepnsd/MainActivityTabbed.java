@@ -1,7 +1,5 @@
 package es.uem.david.samuel.nacho.yepnsd;
 
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -47,8 +45,6 @@ public class MainActivityTabbed extends AbstractActionBarActivity implements Act
         final ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setIcon(R.drawable.ic_launcher);
-        actionBar.setBackgroundDrawable(new ColorDrawable(Color.rgb(130, 130, 130)));
-        actionBar.setStackedBackgroundDrawable(new ColorDrawable(Color.rgb(85, 55, 124)));
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
         // Create the adapter that will return a fragment for each of the three
@@ -83,8 +79,7 @@ public class MainActivityTabbed extends AbstractActionBarActivity implements Act
     }
 
     private void checkUserLogged() {
-
-
+        UtilActivity util = getUtil();
         ParseUser currentUser = ParseUser.getCurrentUser();
 
         if (currentUser == null) {
@@ -94,7 +89,7 @@ public class MainActivityTabbed extends AbstractActionBarActivity implements Act
             // A continuación lee el intent que almacena la clase LoginActivity
             // el metodo startActivity ejecuta una actividad, esa actividad se la pasamos con
             // el intent que se ejecuta y abre la clase LoginActivity
-            openNewActivity(LoginActivity.class);
+            util.openNewActivity(LoginActivity.class);
         }
     }
 
@@ -111,6 +106,7 @@ public class MainActivityTabbed extends AbstractActionBarActivity implements Act
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
+        UtilActivity util = getUtil();
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
@@ -118,10 +114,10 @@ public class MainActivityTabbed extends AbstractActionBarActivity implements Act
             return true;
         } else if (id == R.id.action_logout) {
             ParseUser.logOut();
-            openNewActivity(LoginActivity.class);
+            util.openNewActivity(LoginActivity.class);
             return true;
         } else if (id == R.id.action_edit_friends) {
-            openNewActivity(EditFriendsActivity.class, false);
+            util.openNewActivity(EditFriendsActivity.class, false);
         } else if (id == R.id.action_camera) {
             doCameraDialog();
         }

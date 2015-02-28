@@ -32,8 +32,7 @@ public class InboxFragment extends ListFragment {
     private static final String ARG_SECTION_NUMBER = "section_number";
 
     private List<ParseObject> mMessages;
-    private ArrayList<String> messages;
-    private ArrayAdapter<String> adapter;
+    private MessageAdapter adapter;
 
     /**
      * Returns a new instance of this fragment for the given section
@@ -59,10 +58,8 @@ public class InboxFragment extends ListFragment {
     public void onResume() {
         super.onResume();
 
-        FragmentActivity fAct = getActivity();
+        final FragmentActivity fAct = getActivity();
         final View progressBar = fAct.findViewById(R.id.progressBarInbox);
-        messages = new ArrayList<String>();
-        adapter = new ArrayAdapter<String>(fAct, android.R.layout.simple_list_item_1, messages);
         setListAdapter(adapter);
 
         ParseUser pUser = ParseUser.getCurrentUser();
@@ -74,9 +71,9 @@ public class InboxFragment extends ListFragment {
             public void done(List<ParseObject> parseObjects, ParseException e) {
                 if (parseObjects != null) {
                     mMessages = parseObjects;
-                    for (ParseObject message : mMessages) {
-                        adapter.add(message.getString(Constantes.ParseClasses.Messages.KEY_SENDER_NAME));
-                    }
+                    adapter = new MessageAdapter(fAct, mMessages);
+                    setListAdapter(adapter);
+
                     progressBar.setVisibility(View.INVISIBLE);
                 } else {
                     // TODO Message Error
