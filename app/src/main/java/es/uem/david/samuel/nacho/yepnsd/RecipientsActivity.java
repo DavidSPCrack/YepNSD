@@ -57,9 +57,10 @@ public class RecipientsActivity extends ActionBarActivity {
             RecipientsFragment fragment = RecipientsFragment.getInstance();
 
             ParseObject message = null;
-            AsyncTask task = new AsyncTask() {
+            AsyncTask task = new AsyncTask<Void, Void, Void>() {
+
                 @Override
-                protected Object doInBackground(Object[] params) {
+                protected Void doInBackground(Void... params) {
                     return null;
                 }
             };

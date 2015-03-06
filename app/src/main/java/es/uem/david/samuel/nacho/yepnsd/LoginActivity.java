@@ -39,14 +39,11 @@ public class LoginActivity extends AbstractActionBarActivity {
                 ParseUser.logInInBackground(username, password, new LogInCallback() {
                     @Override
                     public void done(ParseUser parseUser, ParseException e) {
-                        pd.dismiss();
+                        util.hideProgressDialog(pd);
                         if (parseUser != null) {
                             util.openNewActivity(MainActivityTabbed.class);
                         } else {
-                            String title = util.getResourceString(R.string.alert);
-                            String msg = e.getMessage();
-                            String button = util.getResourceString(R.string.alert_button);
-                            util.doDialog(title, msg, button);
+                            util.doAlertDialog(e);
                         }
                     }
                 });

@@ -49,11 +49,11 @@ public class SignUpActivity extends AbstractActionBarActivity {
                         newUser.signUpInBackground(new SignUpCallback() {
                             @Override
                             public void done(ParseException e) {
-                            pd.dismiss();
+                            util.hideProgressDialog(pd);
                             if (e == null) {
                                 util.openNewActivity(MainActivityTabbed.class);
                             } else {
-                                util.doAlertDialog(e.getMessage());
+                                util.doAlertDialog(e);
                             }
                             }
                         });

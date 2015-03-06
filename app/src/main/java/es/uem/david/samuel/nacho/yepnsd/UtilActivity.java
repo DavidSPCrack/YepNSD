@@ -38,6 +38,11 @@ public class UtilActivity {
         doAlertDialog(msg);
     }
 
+    protected void doAlertDialog(Throwable t) {
+        String msg = t.getMessage();
+        doAlertDialog(msg);
+    }
+
     protected void doAlertDialog(String msg) {
         String title = getResourceString(R.string.alert);
         String button = getResourceString(R.string.alert_button);
@@ -66,7 +71,7 @@ public class UtilActivity {
         AlertDialog alertDialog = new AlertDialog.Builder(mActivity).create();
         alertDialog.setTitle(title);
         alertDialog.setMessage(msg);
-        alertDialog.setIcon(android.R.drawable.ic_dialog_alert);
+        alertDialog.setIcon(R.drawable.ic_warning_amber);
         alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, button,
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
@@ -149,6 +154,10 @@ public class UtilActivity {
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         }
         mActivity.startActivity(intent);
+    }
+
+    protected void hideProgressDialog(ProgressDialog progressDialog) {
+        progressDialog.dismiss();
     }
 
     protected void hideView(int id) {

@@ -60,10 +60,8 @@ public class EditFriendsActivity extends AbstractListActivity {
                 if (e == null) {
 
                 } else {
-                    String title = getResourceString(R.string.alert);
-                    String msg = e.getMessage();
-                    String button = getResourceString(R.string.alert_button);
-                    doDialog(title, msg, button);
+                    UtilActivity util = getUtil();
+                    util.doAlertDialog(e);
                 }
             }
         });
@@ -100,10 +98,8 @@ public class EditFriendsActivity extends AbstractListActivity {
                     }
                     addFriendCheckmarks();
                 } else {
-                    String title = getResourceString(R.string.alert);
-                    String msg = e.getMessage();
-                    String button = getResourceString(R.string.alert_button);
-                    doDialog(title, msg, button);
+                    UtilActivity util = getUtil();
+                    util.doAlertDialog(e);
                 }
             }
         });
@@ -132,10 +128,8 @@ public class EditFriendsActivity extends AbstractListActivity {
                     }
                     progressBar.setVisibility(View.INVISIBLE);
                 } else {
-                    String title = getResourceString(R.string.alert);
-                    String msg = e.getMessage();
-                    String button = getResourceString(R.string.alert_button);
-                    doDialog(title, msg, button);
+                    UtilActivity util = getUtil();
+                    util.doAlertDialog(e);
                 }
             }
         });
