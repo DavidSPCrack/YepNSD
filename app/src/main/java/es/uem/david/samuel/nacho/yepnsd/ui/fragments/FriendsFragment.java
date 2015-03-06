@@ -1,4 +1,4 @@
-package es.uem.david.samuel.nacho.yepnsd;
+package es.uem.david.samuel.nacho.yepnsd.ui.fragments;
 
 
 import android.app.AlertDialog;
@@ -19,6 +19,9 @@ import com.parse.ParseUser;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import es.uem.david.samuel.nacho.yepnsd.constants.Constantes;
+import es.uem.david.samuel.nacho.yepnsd.R;
 
 /**
  * Created by usuario.apellido on 06/02/2015.

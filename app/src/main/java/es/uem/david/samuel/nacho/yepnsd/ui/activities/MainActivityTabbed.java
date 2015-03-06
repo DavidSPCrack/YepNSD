@@ -1,4 +1,4 @@
-package es.uem.david.samuel.nacho.yepnsd;
+package es.uem.david.samuel.nacho.yepnsd.ui.activities;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -13,6 +13,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.parse.ParseUser;
+
+import es.uem.david.samuel.nacho.yepnsd.R;
+import es.uem.david.samuel.nacho.yepnsd.adapters.SectionsPagerAdapter;
+import es.uem.david.samuel.nacho.yepnsd.utils.UtilActivity;
 
 
 public class MainActivityTabbed extends AbstractActionBarActivity implements ActionBar.TabListener {

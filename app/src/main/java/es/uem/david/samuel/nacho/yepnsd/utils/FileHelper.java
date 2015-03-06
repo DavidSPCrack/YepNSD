@@ -1,4 +1,4 @@
-package es.uem.david.samuel.nacho.yepnsd;
+package es.uem.david.samuel.nacho.yepnsd.utils;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -13,6 +13,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+
+import es.uem.david.samuel.nacho.yepnsd.constants.Constantes;
 
 /**
  * Created by Carlos on 08/02/2015.

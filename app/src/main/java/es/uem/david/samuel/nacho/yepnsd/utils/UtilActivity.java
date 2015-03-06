@@ -1,4 +1,4 @@
-package es.uem.david.samuel.nacho.yepnsd;
+package es.uem.david.samuel.nacho.yepnsd.utils;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -10,6 +10,8 @@ import android.graphics.drawable.Drawable;
 import android.text.Editable;
 import android.view.View;
 import android.widget.EditText;
+
+import es.uem.david.samuel.nacho.yepnsd.R;
 
 /**
  * Created by usuario.apellido on 28/02/2015.
@@ -24,50 +26,50 @@ public class UtilActivity {
         this.mActivity = activity;
     }
 
-    protected void doFieldAlertDialog(String field) {
+    public void doFieldAlertDialog(String field) {
         doAlertDialog(R.string.field_missing, field);
     }
 
-    protected void doAlertDialog(int msgId, String var) {
+    public void doAlertDialog(int msgId, String var) {
         String msg = getResourceString(msgId, var);
         doAlertDialog(msg);
     }
 
-    protected void doAlertDialog(int msgId) {
+    public void doAlertDialog(int msgId) {
         String msg = getResourceString(msgId);
         doAlertDialog(msg);
     }
 
-    protected void doAlertDialog(Throwable t) {
+    public void doAlertDialog(Throwable t) {
         String msg = t.getMessage();
         doAlertDialog(msg);
     }
 
-    protected void doAlertDialog(String msg) {
+    public void doAlertDialog(String msg) {
         String title = getResourceString(R.string.alert);
         String button = getResourceString(R.string.alert_button);
         doDialog(title, msg, button);
     }
 
-    protected Resources getResources() {
+    public Resources getResources() {
         return mActivity.getResources();
     }
 
-    protected View findViewById(int id) {
+    public View findViewById(int id) {
         return mActivity.findViewById(id);
     }
 
-    protected String getResourceString(int id) {
+    public String getResourceString(int id) {
         Resources res = getResources();
         return res.getString(id);
     }
 
-    protected String getResourceString(int id, String var1) {
+    public String getResourceString(int id, String var1) {
         String s = getResourceString(id);
         return String.format(s, var1);
     }
 
-    protected void doDialog(String title, String msg, String button) {
+    public void doDialog(String title, String msg, String button) {
         AlertDialog alertDialog = new AlertDialog.Builder(mActivity).create();
         alertDialog.setTitle(title);
         alertDialog.setMessage(msg);
@@ -81,7 +83,7 @@ public class UtilActivity {
         alertDialog.show();
     }
 
-    protected String getEditTextValue(int id) {
+    public String getEditTextValue(int id) {
         View v = findViewById(id);
         if (v != null) {
             if (v instanceof EditText) {
@@ -93,7 +95,7 @@ public class UtilActivity {
         return "";
     }
 
-    protected String getEditTextHint(int id) {
+    public String getEditTextHint(int id) {
         View v = findViewById(id);
         if (v != null) {
             if (v instanceof EditText) {
@@ -104,14 +106,14 @@ public class UtilActivity {
         return "";
     }
 
-    protected String getEditTextValueAndValidate(int id) {
+    public String getEditTextValueAndValidate(int id) {
         String text = getEditTextValue(id);
         String field = getEditTextHint(id);
         validateNoEmpty(text, field);
         return text;
     }
 
-    protected boolean validateNoEmpty(String text, String field) {
+    public boolean validateNoEmpty(String text, String field) {
         if (isTextEmpty(text)) {
             doFieldAlertDialog(field);
             return false;
@@ -119,11 +121,11 @@ public class UtilActivity {
         return true;
     }
 
-    protected boolean isTextEmpty(String s) {
+    public boolean isTextEmpty(String s) {
         return s == null || s.isEmpty();
     }
 
-    protected boolean isAnyEmpty(String... s) {
+    public boolean isAnyEmpty(String... s) {
         for (int i = 0; i < s.length; i++) {
             if (isTextEmpty(s[i])) {
                 return true;
@@ -132,22 +134,22 @@ public class UtilActivity {
         return false;
     }
 
-    protected Drawable getDrawableRes(int id) {
+    public Drawable getDrawableRes(int id) {
         Resources res = getResources();
         return res.getDrawable(id);
     }
 
-    protected ProgressDialog getProgressDialog(int title) {
+    public ProgressDialog getProgressDialog(int title) {
         return ProgressDialog.show(mActivity,
                 getResourceString(title),
                 getResourceString(R.string.please_wait), true);
     }
 
-    protected void openNewActivity(Class<?> dstClass) {
+    public void openNewActivity(Class<?> dstClass) {
         openNewActivity(dstClass, true);
     }
 
-    protected void openNewActivity(Class<?> dstClass, boolean swClearTask) {
+    public void openNewActivity(Class<?> dstClass, boolean swClearTask) {
         Intent intent = new Intent(mActivity, dstClass);
         if (swClearTask) {
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -156,11 +158,11 @@ public class UtilActivity {
         mActivity.startActivity(intent);
     }
 
-    protected void hideProgressDialog(ProgressDialog progressDialog) {
+    public void hideProgressDialog(ProgressDialog progressDialog) {
         progressDialog.dismiss();
     }
 
-    protected void hideView(int id) {
+    public void hideView(int id) {
         View vFound = findViewById(id);
         if (vFound != null) {
             vFound.setVisibility(View.GONE);

@@ -1,4 +1,4 @@
-package es.uem.david.samuel.nacho.yepnsd;
+package es.uem.david.samuel.nacho.yepnsd.ui.activities;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
@@ -10,6 +10,9 @@ import android.view.View;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
+
+import es.uem.david.samuel.nacho.yepnsd.R;
+import es.uem.david.samuel.nacho.yepnsd.utils.UtilActivity;
 
 
 public class SignUpActivity extends AbstractActionBarActivity {

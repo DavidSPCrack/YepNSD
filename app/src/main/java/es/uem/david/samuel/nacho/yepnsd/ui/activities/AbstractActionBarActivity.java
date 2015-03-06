@@ -1,22 +1,21 @@
-package es.uem.david.samuel.nacho.yepnsd;
+package es.uem.david.samuel.nacho.yepnsd.ui.activities;
 
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
-import android.text.Editable;
-import android.view.View;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+
+import es.uem.david.samuel.nacho.yepnsd.constants.Constantes;
+import es.uem.david.samuel.nacho.yepnsd.utils.FileUtilities;
+import es.uem.david.samuel.nacho.yepnsd.R;
+import es.uem.david.samuel.nacho.yepnsd.utils.UtilActivity;
 
 /**
  * Created by usuario.apellido on 23/01/2015.

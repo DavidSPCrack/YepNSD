@@ -3,7 +3,7 @@
     style="@style/AuthBackgroundFill"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    tools:context="es.uem.david.samuel.nacho.yepnsd.LoginActivity">
+    tools:context="es.uem.david.samuel.nacho.yepnsd.ui.activities.LoginActivity">
 
     <ImageView
         android:id="@+id/backgroundImage"

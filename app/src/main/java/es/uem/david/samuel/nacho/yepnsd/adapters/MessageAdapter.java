@@ -1,4 +1,4 @@
-package es.uem.david.samuel.nacho.yepnsd;
+package es.uem.david.samuel.nacho.yepnsd.adapters;
 
 import android.content.Context;
 import android.text.format.DateUtils;
@@ -13,6 +13,9 @@ import com.parse.ParseObject;
 
 import java.util.Date;
 import java.util.List;
+
+import es.uem.david.samuel.nacho.yepnsd.constants.Constantes;
+import es.uem.david.samuel.nacho.yepnsd.R;
 
 /**
  * Created by usuario.apellido on 28/02/2015.

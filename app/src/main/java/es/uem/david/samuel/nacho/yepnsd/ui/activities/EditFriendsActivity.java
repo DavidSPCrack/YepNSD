@@ -1,4 +1,4 @@
-package es.uem.david.samuel.nacho.yepnsd;
+package es.uem.david.samuel.nacho.yepnsd.ui.activities;
 
 import android.os.Bundle;
 import android.view.View;
@@ -14,6 +14,10 @@ import com.parse.SaveCallback;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import es.uem.david.samuel.nacho.yepnsd.constants.Constantes;
+import es.uem.david.samuel.nacho.yepnsd.R;
+import es.uem.david.samuel.nacho.yepnsd.utils.UtilActivity;
 
 
 public class EditFriendsActivity extends AbstractListActivity {

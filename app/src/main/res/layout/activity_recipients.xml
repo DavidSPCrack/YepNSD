@@ -2,12 +2,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="es.uem.david.samuel.nacho.yepnsd.RecipientsActivity">
+    tools:context="es.uem.david.samuel.nacho.yepnsd.ui.activities.RecipientsActivity">
 
 
     <fragment
         android:id="@+id/mainFragment"
-        android:name="es.uem.david.samuel.nacho.yepnsd.RecipientsFragment"
+        android:name="es.uem.david.samuel.nacho.yepnsd.ui.fragments.RecipientsFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

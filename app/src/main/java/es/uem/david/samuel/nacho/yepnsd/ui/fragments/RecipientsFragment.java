@@ -1,4 +1,4 @@
-package es.uem.david.samuel.nacho.yepnsd;
+package es.uem.david.samuel.nacho.yepnsd.ui.fragments;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -22,6 +22,11 @@ import com.parse.ParseUser;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import es.uem.david.samuel.nacho.yepnsd.constants.Constantes;
+import es.uem.david.samuel.nacho.yepnsd.R;
+import es.uem.david.samuel.nacho.yepnsd.ui.activities.RecipientsActivity;
+import es.uem.david.samuel.nacho.yepnsd.utils.FileHelper;
 
 
 public class RecipientsFragment extends ListFragment {

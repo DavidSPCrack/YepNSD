@@ -2,11 +2,12 @@ package es.uem.david.samuel.nacho.yepnsd;
 
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.TouchUtils;
-import android.text.Editable;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.parse.ParseUser;
+
+import es.uem.david.samuel.nacho.yepnsd.ui.activities.LoginActivity;
 
 /**
  * Created by david.sancho on 21/02/2015.

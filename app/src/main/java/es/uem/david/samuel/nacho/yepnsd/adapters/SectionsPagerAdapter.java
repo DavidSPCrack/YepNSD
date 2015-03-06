@@ -1,4 +1,4 @@
-package es.uem.david.samuel.nacho.yepnsd;
+package es.uem.david.samuel.nacho.yepnsd.adapters;
 
 
 import android.content.Context;
@@ -7,6 +7,11 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import java.util.Locale;
+
+import es.uem.david.samuel.nacho.yepnsd.R;
+import es.uem.david.samuel.nacho.yepnsd.ui.activities.MainActivityTabbed;
+import es.uem.david.samuel.nacho.yepnsd.ui.fragments.FriendsFragment;
+import es.uem.david.samuel.nacho.yepnsd.ui.fragments.InboxFragment;
 
 
 /**
