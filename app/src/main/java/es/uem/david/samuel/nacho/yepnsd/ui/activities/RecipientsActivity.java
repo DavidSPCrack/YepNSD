@@ -1,24 +1,24 @@
 package es.uem.david.samuel.nacho.yepnsd.ui.activities;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.SaveCallback;
 
-import es.uem.david.samuel.nacho.yepnsd.constants.Constantes;
 import es.uem.david.samuel.nacho.yepnsd.R;
+import es.uem.david.samuel.nacho.yepnsd.constants.Constantes;
 import es.uem.david.samuel.nacho.yepnsd.ui.fragments.RecipientsFragment;
+import es.uem.david.samuel.nacho.yepnsd.utils.UtilActivity;
 
 
-public class RecipientsActivity extends ActionBarActivity {
+public class RecipientsActivity extends AbstractActionBarActivity {
 
     private static RecipientsActivity act;
     private MenuItem mSendMenuItem;
@@ -58,24 +58,29 @@ public class RecipientsActivity extends ActionBarActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_send) {
-            RecipientsFragment fragment = RecipientsFragment.getInstance();
+            final UtilActivity util = getUtil();
+            final RecipientsFragment fragment = RecipientsFragment.getInstance();
 
-            ParseObject message = null;
-            AsyncTask task = new AsyncTask<Void, Void, Void>() {
+            final ProgressDialog pd =  util.getProgressDialog(R.string.please_wait);
+
+            AsyncTask<Void, Void, Void> asyncTask = new AsyncTask<Void, Void, Void>() {
 
                 @Override
                 protected Void doInBackground(Void... params) {
+                    ParseObject message = null;
+                    if (fragment != null) {
+                        message = fragment.createMessage(mMediaUri, mFileType);
+                    }
+                    if (message != null) {
+                        sendMessage(message);
+                    } else {
+                        util.doAlertDialog(R.string.error_sending_message);
+                    }
+                    pd.dismiss();
                     return null;
                 }
             };
-            if (fragment != null) {
-                message = fragment.createMessage(mMediaUri, mFileType);
-            }
-            if (message != null) {
-                sendMessage(message);
-            } else {
-                //TODO Message Error
-            }
+            asyncTask.execute((Void) null);
             return true;
         }
 
@@ -83,14 +88,15 @@ public class RecipientsActivity extends ActionBarActivity {
     }
 
     private void sendMessage(ParseObject pObject) {
+        final UtilActivity util = getUtil();
         pObject.saveInBackground(new SaveCallback() {
             @Override
             public void done(ParseException e) {
                 if (e == null) {
-                    Toast.makeText(RecipientsActivity.this, "Message sended!", Toast.LENGTH_SHORT).show();
+                    util.doToast(R.string.message_sended);
                     finish();
                 } else {
-                    // TODO Error Message
+                    util.doAlertDialog(e);
                 }
             }
         });

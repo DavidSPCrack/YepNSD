@@ -52,12 +52,12 @@ public class SignUpActivity extends AbstractActionBarActivity {
                         newUser.signUpInBackground(new SignUpCallback() {
                             @Override
                             public void done(ParseException e) {
-                            util.hideProgressDialog(pd);
-                            if (e == null) {
-                                util.openNewActivity(MainActivityTabbed.class);
-                            } else {
-                                util.doAlertDialog(e);
-                            }
+                                util.hideProgressDialog(pd);
+                                if (e == null) {
+                                    util.openNewActivity(MainActivityTabbed.class);
+                                } else {
+                                    util.doAlertDialog(e);
+                                }
                             }
                         });
                     }

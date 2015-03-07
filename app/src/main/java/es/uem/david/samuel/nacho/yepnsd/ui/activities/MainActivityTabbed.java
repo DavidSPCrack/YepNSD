@@ -16,12 +16,11 @@ import com.parse.ParseUser;
 
 import es.uem.david.samuel.nacho.yepnsd.R;
 import es.uem.david.samuel.nacho.yepnsd.adapters.SectionsPagerAdapter;
+import es.uem.david.samuel.nacho.yepnsd.utils.ParseAD;
 import es.uem.david.samuel.nacho.yepnsd.utils.UtilActivity;
 
 
 public class MainActivityTabbed extends AbstractActionBarActivity implements ActionBar.TabListener {
-
-    public static final String TAG = MainActivityTabbed.class.getSimpleName();
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -93,7 +92,11 @@ public class MainActivityTabbed extends AbstractActionBarActivity implements Act
             // A continuación lee el intent que almacena la clase LoginActivity
             // el metodo startActivity ejecuta una actividad, esa actividad se la pasamos con
             // el intent que se ejecuta y abre la clase LoginActivity
+
             util.openNewActivity(LoginActivity.class);
+        } else {
+            ParseAD adatos = ParseAD.getInstance();
+            adatos.updateInstallation();
         }
     }
 
@@ -118,6 +121,8 @@ public class MainActivityTabbed extends AbstractActionBarActivity implements Act
             return true;
         } else if (id == R.id.action_logout) {
             ParseUser.logOut();
+            ParseAD adatos = ParseAD.getInstance();
+            adatos.updateInstallation();
             util.openNewActivity(LoginActivity.class);
             return true;
         } else if (id == R.id.action_edit_friends) {

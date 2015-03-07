@@ -86,7 +86,7 @@ public class InboxFragment extends AbstractListFragment {
             @Override
             public void done(List<ParseObject> parseObjects, ParseException e) {
                 if (parseObjects != null) {
-                    if(mSwipeRefreshLayout.isRefreshing()) {
+                    if (mSwipeRefreshLayout.isRefreshing()) {
                         mSwipeRefreshLayout.setRefreshing(false);
                     }
                     progressBar.setVisibility(View.GONE);

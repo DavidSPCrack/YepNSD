@@ -12,7 +12,11 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.parse.ParseObject;
+import com.parse.ParseUser;
+
 import es.uem.david.samuel.nacho.yepnsd.R;
+import es.uem.david.samuel.nacho.yepnsd.adapters.StandardAdapter;
 
 /**
  * Created by usuario.apellido on 28/02/2015.
@@ -126,9 +130,9 @@ public class UtilActivity {
         return s == null || s.isEmpty();
     }
 
-    public boolean isAnyEmpty(String... s) {
-        for (int i = 0; i < s.length; i++) {
-            if (isTextEmpty(s[i])) {
+    public boolean isAnyEmpty(String... strs) {
+        for (String str : strs) {
+            if (isTextEmpty(str)) {
                 return true;
             }
         }
@@ -178,4 +182,13 @@ public class UtilActivity {
     public void doToast(String text) {
         Toast.makeText(mActivity, text, Toast.LENGTH_SHORT).show();
     }
+
+    public StandardAdapter<ParseUser> getAdapterUsers(int layout) {
+        return new StandardAdapter<>(mActivity, layout);
+    }
+
+    public StandardAdapter<ParseObject> getAdapterObjects(int layout) {
+        return new StandardAdapter<>(mActivity, layout);
+    }
+
 }

@@ -1,14 +1,11 @@
 package es.uem.david.samuel.nacho.yepnsd.ui.fragments;
 
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -16,10 +13,10 @@ import com.parse.ParseQuery;
 import com.parse.ParseRelation;
 import com.parse.ParseUser;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import es.uem.david.samuel.nacho.yepnsd.R;
+import es.uem.david.samuel.nacho.yepnsd.adapters.StandardAdapter;
 import es.uem.david.samuel.nacho.yepnsd.constants.Constantes;
 import es.uem.david.samuel.nacho.yepnsd.utils.UtilActivity;
 
@@ -31,7 +28,7 @@ import es.uem.david.samuel.nacho.yepnsd.utils.UtilActivity;
 public class FriendsFragment extends AbstractListFragment {
 
 
-    private ArrayAdapter<String> adapter;
+    private StandardAdapter<ParseUser> adapter;
 
     /**
      * Returns a new instance of this fragment for the given section
@@ -49,6 +46,9 @@ public class FriendsFragment extends AbstractListFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_friends, container, false);
 
+        UtilActivity util = getUtil();
+        adapter = util.getAdapterUsers(android.R.layout.simple_list_item_1);
+
         return rootView;
     }
 
@@ -64,10 +64,6 @@ public class FriendsFragment extends AbstractListFragment {
         ParseUser mCurrentUser = ParseUser.getCurrentUser();
         ParseRelation<ParseUser> mFriendsRelation = mCurrentUser.getRelation(Constantes.Users.FRIENDS_RELATION);
 
-        ArrayList<String> usernames = new ArrayList<String>();
-        adapter = new ArrayAdapter<String>(fAct, android.R.layout.simple_list_item_1, usernames);
-
-
         setListAdapter(adapter);
 
         ParseQuery<ParseUser> qFriends = mFriendsRelation.getQuery();
@@ -75,10 +71,8 @@ public class FriendsFragment extends AbstractListFragment {
             @Override
             public void done(List<ParseUser> users, ParseException e) {
                 if (e == null) {
-                    for (ParseUser user : users) {
-                        adapter.add(user.getUsername());
-                    }
-                    progressBar.setVisibility(View.INVISIBLE);
+                    adapter.refresh(users);
+                    progressBar.setVisibility(View.GONE);
                 } else {
                     util.doAlertDialog(e);
                 }

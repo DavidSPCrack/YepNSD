@@ -19,6 +19,10 @@ public class Constantes {
         public static final int CHOOSE_VIDEO = 3;
     }
 
+    public static final class Installation {
+        public static final String USER = "user";
+    }
+
     public static final class Users {
         public static final String FIELD_USERNAME = "username";
         public static final String FIELD_PASSWORD = "password";

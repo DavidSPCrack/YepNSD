@@ -6,15 +6,14 @@ import android.content.Intent;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
-import android.widget.Toast;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
+import es.uem.david.samuel.nacho.yepnsd.R;
 import es.uem.david.samuel.nacho.yepnsd.constants.Constantes;
 import es.uem.david.samuel.nacho.yepnsd.utils.FileUtilities;
-import es.uem.david.samuel.nacho.yepnsd.R;
 import es.uem.david.samuel.nacho.yepnsd.utils.UtilActivity;
 
 /**
@@ -43,7 +42,7 @@ public abstract class AbstractActionBarActivity extends ActionBarActivity {
     }
 
     protected DialogInterface.OnClickListener mDialogListener() {
-        DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
+        return new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 switch (which) {
@@ -62,7 +61,6 @@ public abstract class AbstractActionBarActivity extends ActionBarActivity {
                 }
             }
         };
-        return listener;
     }
 
     private void chooseVideo() {
@@ -78,6 +76,7 @@ public abstract class AbstractActionBarActivity extends ActionBarActivity {
     }
 
     private void makeVideo() {
+        UtilActivity util = getUtil();
         Intent intent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
 
         mMediaUri = FileUtilities.getOutputMediaFileUri(FileUtilities.MEDIA_TYPE_VIDEO);
@@ -87,11 +86,12 @@ public abstract class AbstractActionBarActivity extends ActionBarActivity {
             intent.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, 0);
             startActivityForResult(intent, MAKE_VIDEO_REQUEST);
         } else {
-            Toast.makeText(this, "Error in external storage", Toast.LENGTH_SHORT).show();
+            util.doToast(R.string.error_external_storage);
         }
     }
 
     private void takePhoto() {
+        UtilActivity util = getUtil();
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
         mMediaUri = FileUtilities.getOutputMediaFileUri(FileUtilities.MEDIA_TYPE_IMAGE);
@@ -99,13 +99,14 @@ public abstract class AbstractActionBarActivity extends ActionBarActivity {
             intent.putExtra(MediaStore.EXTRA_OUTPUT, mMediaUri);
             startActivityForResult(intent, TAKE_PHOTO_REQUEST);
         } else {
-            Toast.makeText(this, "Error in external storage", Toast.LENGTH_SHORT).show();
+            util.doToast(R.string.error_external_storage);
         }
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        UtilActivity util = getUtil();
         if (resultCode == RESULT_OK) {
             switch (requestCode) {
                 case TAKE_PHOTO_REQUEST:
@@ -125,7 +126,7 @@ public abstract class AbstractActionBarActivity extends ActionBarActivity {
                         mMediaUri = data.getData();
                         startRecipentsList(Constantes.FileTypes.IMAGE);
                     } else {
-                        // TODO Mensaje de error
+                        util.doAlertDialog(R.string.image_not_found);
                     }
                     break;
                 case CHOOSE_VIDEO_REQUEST:
@@ -136,30 +137,30 @@ public abstract class AbstractActionBarActivity extends ActionBarActivity {
                             is = getContentResolver().openInputStream(mMediaUri);
                             int fileSize = is.available();
                             if (fileSize > FILE_SIZE_LIMIT) {
-                                UtilActivity util = getUtil();
                                 util.doAlertDialog(R.string.video_size_limit);
                             } else {
                                 startRecipentsList(Constantes.FileTypes.VIDEO);
                             }
                         } catch (FileNotFoundException e) {
-                            // TODO Mensaje de error
+                            util.doAlertDialog(R.string.video_not_found);
                         } catch (IOException e) {
-                            // TODO Mensaje de error
+                            util.doAlertDialog(R.string.unknow_error);
                         } finally {
                             if (is != null) {
                                 try {
                                     is.close();
                                 } catch (IOException e) {
+                                    util.doAlertDialog(e);
                                 }
                             }
                         }
                     } else {
-                        // TODO Mensaje de error
+                        util.doAlertDialog(R.string.unknow_error);
                     }
                     break;
             }
         } else if (resultCode != RESULT_CANCELED) {
-            //TODO Mensaje de error
+            util.doAlertDialog(R.string.unknow_error);
         }
     }
 

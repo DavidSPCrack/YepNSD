@@ -20,12 +20,12 @@ public class StandardAdapter<T> extends ArrayAdapter<String> {
 
     private StandardAdapter(Context context, int resource, List<T> objects, List<String> names) {
         super(context, resource, names);
-        this.names = names;
         this.objects = objects;
+        this.names = names;
     }
 
-    public StandardAdapter(Context context, int resource, List<T> objects) {
-        this(context, resource, objects, getStringList(objects));
+    public StandardAdapter(Context context, int resource) {
+        this(context, resource, new ArrayList<T>(), new ArrayList<String>());
     }
 
     private static List<String> getStringList(List<?> objects) {
@@ -41,6 +41,14 @@ public class StandardAdapter<T> extends ArrayAdapter<String> {
         return lista;
     }
 
+    public void refresh(List<T> objects) {
+        this.objects = objects;
+        this.names.clear();
+        List<String> newNames = getStringList(objects);
+        this.names.addAll(newNames);
+        notifyDataSetChanged();
+    }
+
     public T get(int i) {
         return objects.get(i);
     }
@@ -48,5 +56,23 @@ public class StandardAdapter<T> extends ArrayAdapter<String> {
     public String getName(int i) {
         String name = names.get(i);
         return name == null ? "" : name;
+    }
+
+    public T get(String name) {
+        for (int i = 0; i < names.size(); i++) {
+            if (name.equals(names.get(i))) {
+                return objects.get(i);
+            }
+        }
+        return null;
+    }
+
+    public int getPosition(String name) {
+        for (int i = 0; i < names.size(); i++) {
+            if (name.equals(names.get(i))) {
+                return i;
+            }
+        }
+        return -1;
     }
 }
