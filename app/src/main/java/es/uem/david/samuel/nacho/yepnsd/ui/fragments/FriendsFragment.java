@@ -5,7 +5,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,21 +19,18 @@ import com.parse.ParseUser;
 import java.util.ArrayList;
 import java.util.List;
 
-import es.uem.david.samuel.nacho.yepnsd.constants.Constantes;
 import es.uem.david.samuel.nacho.yepnsd.R;
+import es.uem.david.samuel.nacho.yepnsd.constants.Constantes;
+import es.uem.david.samuel.nacho.yepnsd.utils.UtilActivity;
 
 /**
  * Created by usuario.apellido on 06/02/2015.
  *
  * @author david.sancho
  */
-public class FriendsFragment extends ListFragment {
+public class FriendsFragment extends AbstractListFragment {
 
-    private static final String ARG_SECTION_NUMBER = "section_number";
 
-    private ParseRelation<ParseUser> mFriendsRelation;
-    private ParseUser mCurrentUser;
-    private ArrayList<String> usernames;
     private ArrayAdapter<String> adapter;
 
     /**
@@ -60,13 +56,15 @@ public class FriendsFragment extends ListFragment {
     public void onResume() {
         super.onResume();
 
+        final UtilActivity util = getUtil();
+
         final FragmentActivity fAct = getActivity();
         final View progressBar = fAct.findViewById(R.id.progressBarFriends);
 
-        mCurrentUser = ParseUser.getCurrentUser();
-        mFriendsRelation = mCurrentUser.getRelation(Constantes.Users.FRIENDS_RELATION);
+        ParseUser mCurrentUser = ParseUser.getCurrentUser();
+        ParseRelation<ParseUser> mFriendsRelation = mCurrentUser.getRelation(Constantes.Users.FRIENDS_RELATION);
 
-        usernames = new ArrayList<String>();
+        ArrayList<String> usernames = new ArrayList<String>();
         adapter = new ArrayAdapter<String>(fAct, android.R.layout.simple_list_item_1, usernames);
 
 
@@ -82,20 +80,7 @@ public class FriendsFragment extends ListFragment {
                     }
                     progressBar.setVisibility(View.INVISIBLE);
                 } else {
-                    String title = fAct.getString(R.string.alert);
-                    String msg = e.getMessage();
-                    String button = fAct.getString(R.string.alert_button);
-
-                    AlertDialog alertDialog = new AlertDialog.Builder(fAct).create();
-                    alertDialog.setTitle(title);
-                    alertDialog.setMessage(msg);
-                    alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, button,
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.dismiss();
-                                }
-                            });
-                    alertDialog.show();
+                    util.doAlertDialog(e);
                 }
             }
         });

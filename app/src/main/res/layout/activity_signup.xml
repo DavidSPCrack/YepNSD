@@ -76,7 +76,7 @@
         android:layout_toEndOf="@id/buttonDivider"
         android:layout_toRightOf="@id/buttonDivider"
         android:onClick="cancelClick"
-        android:text="@string/cancel_button_label" />
+        android:text="@android:string/cancel" />
 
 
 </RelativeLayout>

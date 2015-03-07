@@ -19,7 +19,6 @@
     <string name="title_activity_activity_sign_up">ActivitySignUp</string>
     <string name="title_activity_main_activity__tab">Yep!</string>
     <string name="signup_button_label">SIGN UP</string>
-    <string name="cancel_button_label">CANCEL</string>
     <string name="signup_label"><b>Don\'t have an account? Sign up!</b></string>
     <string name="alert">Alert</string>
     <string name="field_missing">The field %1$s is required.</string>
@@ -57,4 +56,6 @@
     <string name="title_activity_image_view">ImageViewActivity</string>
     <string name="message_image">Message Image</string>
     <string name="message_icon">Message Icon</string>
+    <string name="error_sending_message">And error has occurred sending the message</string>
+    <string name="refreshing">Refreshing...</string>
 </resources>

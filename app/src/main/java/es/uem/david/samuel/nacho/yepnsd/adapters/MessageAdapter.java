@@ -14,8 +14,8 @@ import com.parse.ParseObject;
 import java.util.Date;
 import java.util.List;
 
-import es.uem.david.samuel.nacho.yepnsd.constants.Constantes;
 import es.uem.david.samuel.nacho.yepnsd.R;
+import es.uem.david.samuel.nacho.yepnsd.constants.Constantes;
 
 /**
  * Created by usuario.apellido on 28/02/2015.
@@ -59,7 +59,7 @@ public class MessageAdapter extends ArrayAdapter<ParseObject> {
         holder.setTime(convertedDate);
 
         String fileType = message.getString(Constantes.ParseClasses.Messages.KEY_FILE_TYPE);
-        if(fileType.equals(Constantes.FileTypes.IMAGE)) {
+        if (fileType.equals(Constantes.FileTypes.IMAGE)) {
             holder.setIconSource(R.drawable.ic_action_picture);
         } else {
             holder.setIconSource(R.drawable.ic_action_play_over_video);
@@ -69,6 +69,10 @@ public class MessageAdapter extends ArrayAdapter<ParseObject> {
 
         return convertView;
 
+    }
+
+    public ParseObject get(int i) {
+        return mMessages.get(i);
     }
 
     private static class ViewHolder {
@@ -102,5 +106,6 @@ public class MessageAdapter extends ArrayAdapter<ParseObject> {
         private void setTime(String time) {
             this.timeLabel.setText(time);
         }
+
     }
 }

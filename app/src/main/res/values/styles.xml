@@ -19,6 +19,7 @@
 
     <style name="LightPurpleBackground">
         <item name="android:background">@color/light_purple_button</item>
+        <item name="android:divider">@null</item>
     </style>
 
     <style name="_AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">

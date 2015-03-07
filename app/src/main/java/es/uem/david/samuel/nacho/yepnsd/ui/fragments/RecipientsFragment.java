@@ -27,11 +27,11 @@ import es.uem.david.samuel.nacho.yepnsd.constants.Constantes;
 import es.uem.david.samuel.nacho.yepnsd.R;
 import es.uem.david.samuel.nacho.yepnsd.ui.activities.RecipientsActivity;
 import es.uem.david.samuel.nacho.yepnsd.utils.FileHelper;
+import es.uem.david.samuel.nacho.yepnsd.utils.UtilActivity;
 
 
-public class RecipientsFragment extends ListFragment {
+public class RecipientsFragment extends AbstractListFragment {
 
-    private static final String ARG_SECTION_NUMBER = "section_number";
 
     private static RecipientsFragment recipientsFragment;
     private ParseRelation<ParseUser> mFriendsRelation;
@@ -132,6 +132,7 @@ public class RecipientsFragment extends ListFragment {
     }
 
     public ParseObject createMessage(Uri mMediaUri, String mFileType) {
+        final UtilActivity util = getUtil();
         final FragmentActivity fAct = getActivity();
         ParseUser mCurrentUser = ParseUser.getCurrentUser();
 
@@ -151,7 +152,7 @@ public class RecipientsFragment extends ListFragment {
             message.put(Constantes.ParseClasses.Messages.KEY_FILE, pFile);
             message.put(Constantes.ParseClasses.Messages.KEY_FILE_TYPE, mFileType);
         } else {
-            // TODO Mensaje de error
+            util.doAlertDialog(R.string.error_sending_message);
             return null;
         }
         return message;

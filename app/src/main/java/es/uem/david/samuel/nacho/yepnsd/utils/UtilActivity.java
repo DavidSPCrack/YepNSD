@@ -10,6 +10,7 @@ import android.graphics.drawable.Drawable;
 import android.text.Editable;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import es.uem.david.samuel.nacho.yepnsd.R;
 
@@ -167,5 +168,14 @@ public class UtilActivity {
         if (vFound != null) {
             vFound.setVisibility(View.GONE);
         }
+    }
+
+    public void doToast(int textId) {
+        String text = getResourceString(textId);
+        doToast(text);
+    }
+
+    public void doToast(String text) {
+        Toast.makeText(mActivity, text, Toast.LENGTH_SHORT).show();
     }
 }

@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.ListFragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,22 +20,21 @@ import com.parse.ParseUser;
 
 import java.util.List;
 
-import es.uem.david.samuel.nacho.yepnsd.constants.Constantes;
-import es.uem.david.samuel.nacho.yepnsd.adapters.MessageAdapter;
 import es.uem.david.samuel.nacho.yepnsd.R;
+import es.uem.david.samuel.nacho.yepnsd.adapters.MessageAdapter;
+import es.uem.david.samuel.nacho.yepnsd.constants.Constantes;
 import es.uem.david.samuel.nacho.yepnsd.ui.activities.ViewImageActivity;
+import es.uem.david.samuel.nacho.yepnsd.utils.UtilActivity;
 
 /**
  * Created by usuario.apellido on 06/02/2015.
  *
  * @author david.sancho
  */
-public class InboxFragment extends ListFragment {
+public class InboxFragment extends AbstractListFragment {
 
-    private static final String ARG_SECTION_NUMBER = "section_number";
-
-    private List<ParseObject> mMessages;
     private MessageAdapter adapter;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
 
     /**
      * Returns a new instance of this fragment for the given section
@@ -53,6 +52,15 @@ public class InboxFragment extends ListFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_inbox, container, false);
 
+        final UtilActivity util = getUtil();
+        mSwipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipeRefreshLayout);
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                util.doToast(R.string.refreshing);
+                refreshList();
+            }
+        });
 
         return rootView;
     }
@@ -61,6 +69,11 @@ public class InboxFragment extends ListFragment {
     public void onResume() {
         super.onResume();
 
+        refreshList();
+    }
+
+    private void refreshList() {
+        final UtilActivity util = getUtil();
         final FragmentActivity fAct = getActivity();
         final View progressBar = fAct.findViewById(R.id.progressBarInbox);
         setListAdapter(adapter);
@@ -73,13 +86,16 @@ public class InboxFragment extends ListFragment {
             @Override
             public void done(List<ParseObject> parseObjects, ParseException e) {
                 if (parseObjects != null) {
-                    mMessages = parseObjects;
-                    adapter = new MessageAdapter(fAct, mMessages);
+                    if(mSwipeRefreshLayout.isRefreshing()) {
+                        mSwipeRefreshLayout.setRefreshing(false);
+                    }
+                    progressBar.setVisibility(View.GONE);
+
+                    adapter = new MessageAdapter(fAct, parseObjects);
                     setListAdapter(adapter);
 
-                    progressBar.setVisibility(View.INVISIBLE);
                 } else {
-                    // TODO Message Error
+                    util.doAlertDialog(e);
                 }
             }
         });
@@ -89,7 +105,7 @@ public class InboxFragment extends ListFragment {
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
 
-        ParseObject message = mMessages.get(position);
+        ParseObject message = adapter.get(position);
         String fileType = message.getString(Constantes.ParseClasses.Messages.KEY_FILE_TYPE);
         if (fileType.equals(Constantes.FileTypes.IMAGE)) {
             ParseFile file = message.getParseFile(Constantes.ParseClasses.Messages.KEY_FILE);

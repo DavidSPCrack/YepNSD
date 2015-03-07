@@ -47,12 +47,6 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Holo.Light.DarkActionBar" />
         <activity
-            android:name=".ui.fragments.RecipientsFragment"
-            android:label="@string/title_activity_recipients"
-            android:parentActivityName=".ui.activities.MainActivityTabbed"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Holo.Light.DarkActionBar" />
-        <activity
             android:name=".ui.activities.ViewImageActivity"
             android:label="@string/title_activity_image_view"
             android:parentActivityName=".ui.activities.MainActivityTabbed"
@@ -60,8 +54,8 @@
         </activity>
         <activity
             android:name=".ui.activities.RecipientsActivity"
-            android:parentActivityName=".ui.activities.MainActivityTabbed"
-            android:label="@string/title_activity_recipients" >
+            android:label="@string/title_activity_recipients"
+            android:parentActivityName=".ui.activities.MainActivityTabbed" >
         </activity>
     </application>
 
