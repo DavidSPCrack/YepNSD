@@ -18,6 +18,7 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import es.uem.david.samuel.nacho.yepnsd.R;
@@ -63,6 +64,9 @@ public class InboxFragment extends AbstractListFragment {
             }
         });
 
+        adapter = new MessageAdapter(getActivity(), new ArrayList<ParseObject>());
+        setListAdapter(adapter);
+
         return rootView;
     }
 
@@ -87,14 +91,11 @@ public class InboxFragment extends AbstractListFragment {
             @Override
             public void done(List<ParseObject> parseObjects, ParseException e) {
                 if (parseObjects != null) {
+                    adapter.refill(parseObjects);
                     if (mSwipeRefreshLayout.isRefreshing()) {
                         mSwipeRefreshLayout.setRefreshing(false);
                     }
                     progressBar.setVisibility(View.GONE);
-
-                    adapter = new MessageAdapter(fAct, parseObjects);
-                    setListAdapter(adapter);
-
                 } else {
                     util.doAlertDialog(e);
                 }

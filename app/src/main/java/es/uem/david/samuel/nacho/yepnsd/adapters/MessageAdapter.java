@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.parse.ParseObject;
+import com.parse.ParseUser;
 
 import java.util.Date;
 import java.util.List;
@@ -65,6 +66,12 @@ public class MessageAdapter extends ArrayAdapter<ParseObject> {
 
         return convertView;
 
+    }
+
+    public void refill(List<ParseObject> messages) {
+        mMessages.clear();
+        mMessages.addAll(messages);
+        notifyDataSetChanged();
     }
 
     public ParseObject get(int i) {

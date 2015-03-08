@@ -32,7 +32,6 @@ import es.uem.david.samuel.nacho.yepnsd.utils.UtilActivity;
 public class FriendsFragment extends AbstractFragment {
 
     private UserAdapter adapter;
-    private SwipeRefreshLayout mSwipeRefreshLayout;
 
     /**
      * Returns a new instance of this fragment for the given section
@@ -48,24 +47,14 @@ public class FriendsFragment extends AbstractFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_friends, container, false);
+        View rootView = inflater.inflate(R.layout.user_grid, container, false);
 
-        final UtilActivity util = getUtil();
         GridView gridView = (GridView) rootView.findViewById(R.id.friendsGrid);
         TextView emptyText = (TextView) rootView.findViewById(android.R.id.empty);
         gridView.setEmptyView(emptyText);
 
         adapter = new UserAdapter(getActivity(), new ArrayList<ParseUser>());
         gridView.setAdapter(adapter);
-
-        mSwipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipeRefreshLayout);
-        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                util.doToast(R.string.refreshing);
-                refreshFriends();
-            }
-        });
 
         return rootView;
     }
@@ -92,9 +81,6 @@ public class FriendsFragment extends AbstractFragment {
             public void done(List<ParseUser> users, ParseException e) {
                 if (e == null) {
                     adapter.refill(users);
-                    if (mSwipeRefreshLayout.isRefreshing()) {
-                        mSwipeRefreshLayout.setRefreshing(false);
-                    }
                     progressBar.setVisibility(View.GONE);
                 } else {
                     util.doAlertDialog(e);

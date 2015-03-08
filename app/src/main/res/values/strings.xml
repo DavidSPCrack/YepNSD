@@ -31,7 +31,7 @@
     <string name="no_messages">No messages</string>
     <string name="add_friends">Add friends to start chatting</string>
     <string name="action_edit_friends">Add/Edit Friends</string>
-    <string name="title_activity_edit_friends">EditFriendsActivity</string>
+    <string name="title_activity_edit_friends">@string/action_edit_friends</string>
     <string name="no_friends">There\'s no users to add</string>
     <string name="background_content_description">Background Image</string>
     <string name="content_desc_button_divider">Button divider</string>

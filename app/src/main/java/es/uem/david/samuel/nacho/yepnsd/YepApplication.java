@@ -3,7 +3,9 @@ package es.uem.david.samuel.nacho.yepnsd;
 import android.app.Application;
 
 import com.parse.Parse;
+import com.parse.PushService;
 
+import es.uem.david.samuel.nacho.yepnsd.ui.activities.MainActivityTabbed;
 import es.uem.david.samuel.nacho.yepnsd.utils.ParseAD;
 
 /**
@@ -25,6 +27,9 @@ public class YepApplication extends Application {
         Parse.enableLocalDatastore(this);
 
         Parse.initialize(this, "t6VmmFjjxEJmJWlmMPD1OWX74QP0l2lxlMZAoNE1", "YXGs5UvIXHkDwpJ91mrOlzVw5gs0xutvNr7eW25K");
+
+        PushService.setDefaultPushCallback(this, MainActivityTabbed.class,
+                R.drawable.ic_action_camera);
 
         ParseAD adatos = ParseAD.getInstance();
         adatos.updateInstallation();
