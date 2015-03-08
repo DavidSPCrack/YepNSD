@@ -61,7 +61,7 @@ public class RecipientsActivity extends AbstractActionBarActivity {
             final UtilActivity util = getUtil();
             final RecipientsFragment fragment = RecipientsFragment.getInstance();
 
-            final ProgressDialog pd =  util.getProgressDialog(R.string.please_wait);
+            final ProgressDialog pd = util.getProgressDialog(R.string.please_wait);
 
             AsyncTask<Void, Void, Void> asyncTask = new AsyncTask<Void, Void, Void>() {
 
@@ -72,11 +72,11 @@ public class RecipientsActivity extends AbstractActionBarActivity {
                         message = fragment.createMessage(mMediaUri, mFileType);
                     }
                     if (message != null) {
-                        sendMessage(message);
+                        sendMessage(message, pd);
                     } else {
+                        pd.dismiss();
                         util.doAlertDialog(R.string.error_sending_message);
                     }
-                    pd.dismiss();
                     return null;
                 }
             };
@@ -87,13 +87,14 @@ public class RecipientsActivity extends AbstractActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void sendMessage(ParseObject pObject) {
+    private void sendMessage(ParseObject pObject, final ProgressDialog pd) {
         final UtilActivity util = getUtil();
         pObject.saveInBackground(new SaveCallback() {
             @Override
             public void done(ParseException e) {
                 if (e == null) {
                     util.doToast(R.string.message_sended);
+                    pd.dismiss();
                     finish();
                 } else {
                     util.doAlertDialog(e);

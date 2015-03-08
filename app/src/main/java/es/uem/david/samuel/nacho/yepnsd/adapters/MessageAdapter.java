@@ -1,7 +1,6 @@
 package es.uem.david.samuel.nacho.yepnsd.adapters;
 
 import android.content.Context;
-import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +15,7 @@ import java.util.List;
 
 import es.uem.david.samuel.nacho.yepnsd.R;
 import es.uem.david.samuel.nacho.yepnsd.constants.Constantes;
+import es.uem.david.samuel.nacho.yepnsd.utils.Util;
 
 /**
  * Created by usuario.apellido on 28/02/2015.
@@ -35,7 +35,7 @@ public class MessageAdapter extends ArrayAdapter<ParseObject> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder holder = null;
+        ViewHolder holder;
         if (convertView == null) {
             convertView = LayoutInflater.from(mContext).inflate(R.layout.message_item, null);
 
@@ -51,11 +51,7 @@ public class MessageAdapter extends ArrayAdapter<ParseObject> {
         ParseObject message = mMessages.get(position);
 
         Date createdAt = message.getCreatedAt();
-        long now = new Date().getTime();
-        String convertedDate = DateUtils.getRelativeTimeSpanString(
-                createdAt.getTime(),
-                now,
-                DateUtils.SECOND_IN_MILLIS).toString();
+        String convertedDate = Util.convertDate(createdAt);
         holder.setTime(convertedDate);
 
         String fileType = message.getString(Constantes.ParseClasses.Messages.KEY_FILE_TYPE);

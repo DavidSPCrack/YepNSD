@@ -24,6 +24,7 @@ import es.uem.david.samuel.nacho.yepnsd.R;
 import es.uem.david.samuel.nacho.yepnsd.adapters.MessageAdapter;
 import es.uem.david.samuel.nacho.yepnsd.constants.Constantes;
 import es.uem.david.samuel.nacho.yepnsd.ui.activities.ViewImageActivity;
+import es.uem.david.samuel.nacho.yepnsd.utils.Util;
 import es.uem.david.samuel.nacho.yepnsd.utils.UtilActivity;
 
 /**
@@ -106,16 +107,22 @@ public class InboxFragment extends AbstractListFragment {
         super.onListItemClick(l, v, position, id);
 
         ParseObject message = adapter.get(position);
-        String fileType = message.getString(Constantes.ParseClasses.Messages.KEY_FILE_TYPE);
-        if (fileType.equals(Constantes.FileTypes.IMAGE)) {
+        if (message != null) {
+            String fileType = message.getString(Constantes.ParseClasses.Messages.KEY_FILE_TYPE);
             ParseFile file = message.getParseFile(Constantes.ParseClasses.Messages.KEY_FILE);
             Uri fileUri = Uri.parse(file.getUrl());
+            if (fileType.equals(Constantes.FileTypes.IMAGE)) {
 
-            Intent intent = new Intent(getActivity(), ViewImageActivity.class);
-            intent.setData(fileUri);
-            startActivity(intent);
-        } else {
-            //Intent intent = new Intent(Intent.ACTION_VIEW);
+                Intent intent = new Intent(getActivity(), ViewImageActivity.class);
+                intent.setData(fileUri);
+                intent.putExtra(Constantes.ParseClasses.Messages.KEY_SENDER_NAME, message.getString(Constantes.ParseClasses.Messages.KEY_SENDER_NAME));
+                intent.putExtra(Constantes.ParseClasses.Messages.KEY_CREATED_AT, Util.convertDate(message.getCreatedAt()));
+                startActivity(intent);
+            } else {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setDataAndType(fileUri, "video/*");
+                startActivity(intent);
+            }
         }
     }
 }

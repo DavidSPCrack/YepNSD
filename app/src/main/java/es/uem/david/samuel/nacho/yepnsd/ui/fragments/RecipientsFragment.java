@@ -2,6 +2,7 @@ package es.uem.david.samuel.nacho.yepnsd.ui.fragments;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,14 +46,19 @@ public class RecipientsFragment extends AbstractListFragment {
 
         recipientsFragment = this;
 
+        return rootView;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
         UtilActivity util = getUtil();
         adapter = util.getAdapterUsers(android.R.layout.simple_list_item_checked);
 
         ListView listView = getListView();
         listView.setAdapter(adapter);
         listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
-
-        return rootView;
     }
 
     @Override

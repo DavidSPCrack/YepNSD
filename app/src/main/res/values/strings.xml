@@ -57,10 +57,11 @@
     <string name="message_image">Message Image</string>
     <string name="message_icon">Message Icon</string>
     <string name="error_sending_message">And error has occurred sending the message</string>
-    <string name="refreshing">Refreshing...</string>
+    <string name="refreshing">Refreshing…</string>
     <string name="image_not_found">Image not found</string>
     <string name="video_not_found">Video not found</string>
     <string name="unknow_error">Unknow error</string>
     <string name="error_external_storage">Error in external storage</string>
     <string name="message_sended">Message sended!</string>
+    <string name="sender_name">Sender: %s</string>
 </resources>
