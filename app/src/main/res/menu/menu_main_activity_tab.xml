@@ -21,6 +21,6 @@
         android:id="@+id/action_camera"
         android:orderInCategory="400"
         android:title="@string/camera_action_label"
-        android:icon="@drawable/ic_menu_camera_white"
+        android:icon="@drawable/ic_menu_camera"
         app:showAsAction="ifRoom" />
 </menu>

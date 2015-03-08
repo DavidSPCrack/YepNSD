@@ -56,9 +56,9 @@ public class MessageAdapter extends ArrayAdapter<ParseObject> {
 
         String fileType = message.getString(Constantes.ParseClasses.Messages.KEY_FILE_TYPE);
         if (fileType.equals(Constantes.FileTypes.IMAGE)) {
-            holder.setIconSource(R.drawable.ic_action_picture);
+            holder.setIconSource(R.drawable.ic_picture);
         } else {
-            holder.setIconSource(R.drawable.ic_action_play_over_video);
+            holder.setIconSource(R.drawable.ic_video);
         }
         holder.setSender(message.getString(Constantes.ParseClasses.Messages.KEY_SENDER_NAME));
 

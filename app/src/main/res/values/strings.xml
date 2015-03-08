@@ -64,4 +64,6 @@
     <string name="error_external_storage">Error in external storage</string>
     <string name="message_sended">Message sended!</string>
     <string name="sender_name">Sender: %s</string>
+    <string name="content_desc_user_avatar">User avatar</string>
+    <string name="content_desc_user_checkmark">User checkmark</string>
 </resources>

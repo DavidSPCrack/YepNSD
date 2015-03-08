@@ -3,9 +3,12 @@ package es.uem.david.samuel.nacho.yepnsd.ui.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
+import android.widget.TextView;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -13,10 +16,11 @@ import com.parse.ParseQuery;
 import com.parse.ParseRelation;
 import com.parse.ParseUser;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import es.uem.david.samuel.nacho.yepnsd.R;
-import es.uem.david.samuel.nacho.yepnsd.adapters.StandardAdapter;
+import es.uem.david.samuel.nacho.yepnsd.adapters.UserAdapter;
 import es.uem.david.samuel.nacho.yepnsd.constants.Constantes;
 import es.uem.david.samuel.nacho.yepnsd.utils.UtilActivity;
 
@@ -25,10 +29,10 @@ import es.uem.david.samuel.nacho.yepnsd.utils.UtilActivity;
  *
  * @author david.sancho
  */
-public class FriendsFragment extends AbstractListFragment {
+public class FriendsFragment extends AbstractFragment {
 
-
-    private StandardAdapter<ParseUser> adapter;
+    private UserAdapter adapter;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
 
     /**
      * Returns a new instance of this fragment for the given section
@@ -46,8 +50,22 @@ public class FriendsFragment extends AbstractListFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_friends, container, false);
 
-        UtilActivity util = getUtil();
-        adapter = util.getAdapterUsers(android.R.layout.simple_list_item_1);
+        final UtilActivity util = getUtil();
+        GridView gridView = (GridView) rootView.findViewById(R.id.friendsGrid);
+        TextView emptyText = (TextView) rootView.findViewById(android.R.id.empty);
+        gridView.setEmptyView(emptyText);
+
+        adapter = new UserAdapter(getActivity(), new ArrayList<ParseUser>());
+        gridView.setAdapter(adapter);
+
+        mSwipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipeRefreshLayout);
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                util.doToast(R.string.refreshing);
+                refreshFriends();
+            }
+        });
 
         return rootView;
     }
@@ -56,6 +74,10 @@ public class FriendsFragment extends AbstractListFragment {
     public void onResume() {
         super.onResume();
 
+        refreshFriends();
+    }
+
+    private void refreshFriends() {
         final UtilActivity util = getUtil();
 
         final FragmentActivity fAct = getActivity();
@@ -64,14 +86,15 @@ public class FriendsFragment extends AbstractListFragment {
         ParseUser mCurrentUser = ParseUser.getCurrentUser();
         ParseRelation<ParseUser> mFriendsRelation = mCurrentUser.getRelation(Constantes.Users.FRIENDS_RELATION);
 
-        setListAdapter(adapter);
-
         ParseQuery<ParseUser> qFriends = mFriendsRelation.getQuery();
         qFriends.findInBackground(new FindCallback<ParseUser>() {
             @Override
             public void done(List<ParseUser> users, ParseException e) {
                 if (e == null) {
-                    adapter.refresh(users);
+                    adapter.refill(users);
+                    if (mSwipeRefreshLayout.isRefreshing()) {
+                        mSwipeRefreshLayout.setRefreshing(false);
+                    }
                     progressBar.setVisibility(View.GONE);
                 } else {
                     util.doAlertDialog(e);
