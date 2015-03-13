@@ -9,11 +9,16 @@ import android.widget.ImageView;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.RequestCreator;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import es.uem.david.samuel.nacho.yepnsd.R;
 import es.uem.david.samuel.nacho.yepnsd.constants.Constantes;
 
 
 public class ViewImageActivity extends AbstractActionBarActivity {
+
+    private static final int TIME_TO_CLOSE = 10 * 1000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +40,14 @@ public class ViewImageActivity extends AbstractActionBarActivity {
         Picasso pic = Picasso.with(this);
         RequestCreator req = pic.load(uriImg);
         req.into(photo);
+
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                finish();
+            }
+        }, TIME_TO_CLOSE);
 
     }
 }

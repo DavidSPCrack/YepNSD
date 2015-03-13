@@ -11,12 +11,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import com.parse.DeleteCallback;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -107,6 +109,8 @@ public class InboxFragment extends AbstractListFragment {
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
 
+        final UtilActivity util = getUtil();
+        final ParseUser currentUser = ParseUser.getCurrentUser();
         ParseObject message = adapter.get(position);
         if (message != null) {
             String fileType = message.getString(Constantes.ParseClasses.Messages.KEY_FILE_TYPE);
@@ -123,6 +127,37 @@ public class InboxFragment extends AbstractListFragment {
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 intent.setDataAndType(fileUri, "video/*");
                 startActivity(intent);
+            }
+            List<Object> ids = message.getList(Constantes.ParseClasses.Messages.KEY_ID_RECIPIENTS);
+            if (ids != null) {
+                if (ids.size() > 1) {
+                    String currentId = currentUser.getObjectId();
+                    ids.remove(currentId);
+                    ArrayList<String> idsToRemove = new ArrayList<>();
+                    idsToRemove.add(currentId);
+                    message.removeAll(Constantes.ParseClasses.Messages.KEY_ID_RECIPIENTS, idsToRemove);
+                    message.saveInBackground(new SaveCallback() {
+                        @Override
+                        public void done(ParseException e) {
+                            if (e == null) {
+                                refreshList();
+                            } else {
+                                util.doAlertDialog(e);
+                            }
+                        }
+                    });
+                } else {
+                    message.deleteInBackground(new DeleteCallback() {
+                        @Override
+                        public void done(ParseException e) {
+                            if (e == null) {
+                                refreshList();
+                            } else {
+                                util.doAlertDialog(e);
+                            }
+                        }
+                    });
+                }
             }
         }
     }

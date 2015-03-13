@@ -17,6 +17,7 @@ import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
+import com.parse.ParsePush;
 import com.parse.ParseQuery;
 import com.parse.ParseRelation;
 import com.parse.ParseUser;
@@ -174,6 +175,8 @@ public class RecipientsActivity extends AbstractActionBarActivity {
             protected Void doInBackground(Void... params) {
                 ParseObject message = createMessage(mMediaUri, mFileType);
                 if (message != null) {
+                    ParsePush pPush = new ParsePush();
+
                     pd.dismiss();
                 } else {
                     pd.dismiss();
