@@ -66,4 +66,7 @@
     <string name="sender_name">Sender: %s</string>
     <string name="content_desc_user_avatar">User avatar</string>
     <string name="content_desc_user_checkmark">User checkmark</string>
+    <string name="video">video</string>
+    <string name="image">image</string>
+    <string name="notification_text">%1$s has send you a new %2$s</string>
 </resources>

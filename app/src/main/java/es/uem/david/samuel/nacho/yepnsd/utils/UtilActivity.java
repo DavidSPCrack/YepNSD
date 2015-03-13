@@ -74,6 +74,11 @@ public class UtilActivity {
         return String.format(s, var1);
     }
 
+    public String getResourceString(int id, String var1, String var2) {
+        String s = getResourceString(id);
+        return String.format(s, var1, var2);
+    }
+
     public void doDialog(String title, String msg, String button) {
         AlertDialog alertDialog = new AlertDialog.Builder(mActivity).create();
         alertDialog.setTitle(title);

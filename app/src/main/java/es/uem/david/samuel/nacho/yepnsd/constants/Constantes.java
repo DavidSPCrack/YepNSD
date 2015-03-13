@@ -35,6 +35,9 @@ public class Constantes {
 
     public static final class ParseClasses {
 
+        public static final String KEY_OBJECT_ID = "objectId";
+        public static final String KEY_CREATED_AT = "createdAt";
+
         public static final class Messages {
             public static final String CLASS = "message";
             public static final String KEY_ID_SENDER = "idSender";

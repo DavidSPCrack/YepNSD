@@ -16,12 +16,14 @@ import android.widget.TextView;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
+import com.parse.ParseInstallation;
 import com.parse.ParseObject;
 import com.parse.ParsePush;
 import com.parse.ParseQuery;
 import com.parse.ParseRelation;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
+import com.parse.SendCallback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,9 +71,9 @@ public class RecipientsActivity extends AbstractActionBarActivity {
         mFriendsGrid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                ImageView checkImageView = (ImageView)view.findViewById(R.id.checkImageView);
+                ImageView checkImageView = (ImageView) view.findViewById(R.id.checkImageView);
                 boolean selected = mFriendsGrid.isItemChecked(position);
-                if(selected) {
+                if (selected) {
                     checkImageView.setVisibility(View.VISIBLE);
                 } else {
                     checkImageView.setVisibility(View.INVISIBLE);
@@ -158,8 +160,6 @@ public class RecipientsActivity extends AbstractActionBarActivity {
             public void done(ParseException e) {
                 if (e == null) {
                     sendPush(pObject, pd);
-                    util.doToast(R.string.message_sended);
-                    finish();
                 } else {
                     pd.dismiss();
                     util.doAlertDialog(e);
@@ -169,16 +169,53 @@ public class RecipientsActivity extends AbstractActionBarActivity {
     }
 
     private void sendPush(final ParseObject pObject, final ProgressDialog pd) {
+        final ParseUser currentUser = ParseUser.getCurrentUser();
+        final UtilActivity util = getUtil();
         AsyncTask<Void, Void, Void> asyncTask = new AsyncTask<Void, Void, Void>() {
 
             @Override
             protected Void doInBackground(Void... params) {
-                ParseObject message = createMessage(mMediaUri, mFileType);
-                if (message != null) {
-                    ParsePush pPush = new ParsePush();
+                try {
+                    ParseObject message = createMessage(mMediaUri, mFileType);
+                    if (message != null) {
+                        String fileType = message.getString(Constantes.ParseClasses.Messages.KEY_FILE_TYPE);
+                        String fileTypeDesc = fileType.equals(Constantes.FileTypes.IMAGE) ? getString(R.string.image) : getString(R.string.video);
 
-                    pd.dismiss();
-                } else {
+                        String notificationText = util.getResourceString(R.string.notification_text, currentUser.getUsername(), fileTypeDesc);
+
+                        List<Object> recipients = message.getList(Constantes.ParseClasses.Messages.KEY_ID_RECIPIENTS);
+
+                        ParsePush pPush = new ParsePush();
+                        // Find users near a given location
+                        ParseQuery<ParseUser> userQuery = ParseUser.getQuery();
+                        userQuery.whereContainedIn(Constantes.ParseClasses.KEY_OBJECT_ID, recipients);
+                        List<ParseUser> users = userQuery.find();
+
+                        // Find devices associated with these users
+                        ParseQuery<ParseInstallation> pushQuery = ParseInstallation.getQuery();
+                        pushQuery.whereContainedIn(Constantes.Installation.USER, users);
+
+                        // Send push notification to query
+                        ParsePush push = new ParsePush();
+                        push.setQuery(pushQuery); // Set our Installation query
+                        push.setMessage(notificationText);
+                        push.sendInBackground(new SendCallback() {
+                            @Override
+                            public void done(ParseException e) {
+                                if (e == null) {
+                                    util.doToast(R.string.message_sended);
+                                    pd.dismiss();
+                                    finish();
+                                } else {
+                                    util.doAlertDialog(e);
+                                }
+                            }
+                        });
+                    } else {
+                        pd.dismiss();
+                    }
+                } catch (ParseException e) {
+                    util.doAlertDialog(e);
                     pd.dismiss();
                 }
                 return null;
