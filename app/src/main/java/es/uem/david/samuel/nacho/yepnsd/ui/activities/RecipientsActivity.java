@@ -150,20 +150,38 @@ public class RecipientsActivity extends AbstractActionBarActivity {
         });
     }
 
-    private void sendMessage(ParseObject pObject, final ProgressDialog pd) {
+    private void sendMessage(final ParseObject pObject, final ProgressDialog pd) {
         final UtilActivity util = getUtil();
         pObject.saveInBackground(new SaveCallback() {
             @Override
             public void done(ParseException e) {
                 if (e == null) {
+                    sendPush(pObject, pd);
                     util.doToast(R.string.message_sended);
-                    pd.dismiss();
                     finish();
                 } else {
+                    pd.dismiss();
                     util.doAlertDialog(e);
                 }
             }
         });
+    }
+
+    private void sendPush(final ParseObject pObject, final ProgressDialog pd) {
+        AsyncTask<Void, Void, Void> asyncTask = new AsyncTask<Void, Void, Void>() {
+
+            @Override
+            protected Void doInBackground(Void... params) {
+                ParseObject message = createMessage(mMediaUri, mFileType);
+                if (message != null) {
+                    pd.dismiss();
+                } else {
+                    pd.dismiss();
+                }
+                return null;
+            }
+        };
+        asyncTask.execute((Void) null);
     }
 
     public ParseObject createMessage(Uri mMediaUri, String mFileType) {
