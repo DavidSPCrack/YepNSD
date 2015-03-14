@@ -17,7 +17,68 @@
         android:name="es.uem.david.samuel.nacho.yepnsd.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
 
-    <uses-feature android:name="android.hardware.camera2" />
+    <compatible-screens>
+        <!-- all small size screens -->
+        <screen
+            android:screenDensity="ldpi"
+            android:screenSize="small" />
+        <screen
+            android:screenDensity="mdpi"
+            android:screenSize="small" />
+        <screen
+            android:screenDensity="hdpi"
+            android:screenSize="small" />
+        <screen
+            android:screenDensity="xhdpi"
+            android:screenSize="small" />
+        <!-- all normal size screens -->
+        <screen
+            android:screenDensity="ldpi"
+            android:screenSize="normal" />
+        <screen
+            android:screenDensity="mdpi"
+            android:screenSize="normal" />
+        <screen
+            android:screenDensity="hdpi"
+            android:screenSize="normal" />
+        <screen
+            android:screenDensity="xhdpi"
+            android:screenSize="normal" />
+        <!-- all normal size screens -->
+        <screen
+            android:screenDensity="ldpi"
+            android:screenSize="large" />
+        <screen
+            android:screenDensity="mdpi"
+            android:screenSize="large" />
+        <screen
+            android:screenDensity="hdpi"
+            android:screenSize="large" />
+        <screen
+            android:screenDensity="xhdpi"
+            android:screenSize="large" />
+        <!-- all normal size screens -->
+        <screen
+            android:screenDensity="ldpi"
+            android:screenSize="xlarge" />
+        <screen
+            android:screenDensity="mdpi"
+            android:screenSize="xlarge" />
+        <screen
+            android:screenDensity="hdpi"
+            android:screenSize="xlarge" />
+        <screen
+            android:screenDensity="xhdpi"
+            android:screenSize="xlarge" />
+    </compatible-screens>
+
+    <supports-screens
+        android:anyDensity="true"
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:resizeable="true"
+        android:smallScreens="true"
+        android:xlargeScreens="true" />
 
     <application
         android:name=".YepApplication"
@@ -28,7 +89,9 @@
 
         <service android:name="com.parse.PushService" />
 
-        <meta-data android:name="com.parse.push.notification_icon" android:resource="@drawable/ic_stat_yep"/>
+        <meta-data
+            android:name="com.parse.push.notification_icon"
+            android:resource="@drawable/ic_stat_yep" />
 
         <receiver android:name="com.parse.ParseBroadcastReceiver">
             <intent-filter>
@@ -93,11 +156,11 @@
             android:name=".ui.activities.ViewImageActivity"
             android:label="@string/title_activity_image_view"
             android:parentActivityName=".ui.activities.MainActivityTabbed"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activities.RecipientsActivity"
             android:label="@string/title_activity_recipients"
-            android:parentActivityName=".ui.activities.MainActivityTabbed"/>
+            android:parentActivityName=".ui.activities.MainActivityTabbed" />
     </application>
 
 </manifest>
