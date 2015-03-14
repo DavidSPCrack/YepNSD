@@ -17,68 +17,7 @@
         android:name="es.uem.david.samuel.nacho.yepnsd.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
 
-    <compatible-screens>
-        <!-- all small size screens -->
-        <screen
-            android:screenDensity="ldpi"
-            android:screenSize="small" />
-        <screen
-            android:screenDensity="mdpi"
-            android:screenSize="small" />
-        <screen
-            android:screenDensity="hdpi"
-            android:screenSize="small" />
-        <screen
-            android:screenDensity="xhdpi"
-            android:screenSize="small" />
-        <!-- all normal size screens -->
-        <screen
-            android:screenDensity="ldpi"
-            android:screenSize="normal" />
-        <screen
-            android:screenDensity="mdpi"
-            android:screenSize="normal" />
-        <screen
-            android:screenDensity="hdpi"
-            android:screenSize="normal" />
-        <screen
-            android:screenDensity="xhdpi"
-            android:screenSize="normal" />
-        <!-- all normal size screens -->
-        <screen
-            android:screenDensity="ldpi"
-            android:screenSize="large" />
-        <screen
-            android:screenDensity="mdpi"
-            android:screenSize="large" />
-        <screen
-            android:screenDensity="hdpi"
-            android:screenSize="large" />
-        <screen
-            android:screenDensity="xhdpi"
-            android:screenSize="large" />
-        <!-- all normal size screens -->
-        <screen
-            android:screenDensity="ldpi"
-            android:screenSize="xlarge" />
-        <screen
-            android:screenDensity="mdpi"
-            android:screenSize="xlarge" />
-        <screen
-            android:screenDensity="hdpi"
-            android:screenSize="xlarge" />
-        <screen
-            android:screenDensity="xhdpi"
-            android:screenSize="xlarge" />
-    </compatible-screens>
-
-    <supports-screens
-        android:anyDensity="true"
-        android:largeScreens="true"
-        android:normalScreens="true"
-        android:resizeable="true"
-        android:smallScreens="true"
-        android:xlargeScreens="true" />
+    <uses-feature android:name="android.hardware.camera" android:required="true" />
 
     <application
         android:name=".YepApplication"
