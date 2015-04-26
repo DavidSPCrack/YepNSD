@@ -3,6 +3,7 @@ package es.uem.david.samuel.nacho.yepnsd;
 import android.app.Application;
 
 import com.parse.Parse;
+import com.parse.ParseCrashReporting;
 import com.parse.PushService;
 
 import es.uem.david.samuel.nacho.yepnsd.ui.activities.MainActivityTabbed;
@@ -25,6 +26,7 @@ public class YepApplication extends Application {
     public void onCreate() {
         // Enable Local Datastore.
         Parse.enableLocalDatastore(this);
+        ParseCrashReporting.enable(this);
 
         Parse.initialize(this, "t6VmmFjjxEJmJWlmMPD1OWX74QP0l2lxlMZAoNE1", "YXGs5UvIXHkDwpJ91mrOlzVw5gs0xutvNr7eW25K");
 
