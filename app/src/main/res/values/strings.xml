@@ -22,11 +22,11 @@
     <string name="signup_label"><b>Don\'t have an account? Sign up!</b></string>
     <string name="alert">Alert</string>
     <string name="field_missing">The field %1$s is required.</string>
+    <string name="please_wait">Please wait…</string>
     <string name="alert_button">OK</string>
     <string name="background">Ribbit Frog Background Image</string>
     <string name="login_in">Login In</string>
     <string name="signing_up">Signing Up</string>
-    <string name="please_wait">Please wait…</string>
     <string name="signup_title">Sign Up!</string>
     <string name="no_messages">No messages</string>
     <string name="add_friends">Add friends to start chatting</string>
