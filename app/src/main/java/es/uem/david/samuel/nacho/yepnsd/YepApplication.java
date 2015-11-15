@@ -24,14 +24,12 @@ public class YepApplication extends Application {
 
     @Override
     public void onCreate() {
+        super.onCreate();
         // Enable Local Datastore.
         Parse.enableLocalDatastore(this);
         ParseCrashReporting.enable(this);
 
         Parse.initialize(this, "t6VmmFjjxEJmJWlmMPD1OWX74QP0l2lxlMZAoNE1", "YXGs5UvIXHkDwpJ91mrOlzVw5gs0xutvNr7eW25K");
-
-        PushService.setDefaultPushCallback(this, MainActivityTabbed.class,
-                R.drawable.ic_action_camera);
 
         ParseAD adatos = ParseAD.getInstance();
         adatos.updateInstallation();
